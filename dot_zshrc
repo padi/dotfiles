@@ -102,7 +102,7 @@ zinit snippet OMZP::ruby
 #   - `brew tap homebrew/command-not-found`
 # - for other OS (e.g. termux, ubuntu) see README:
 #   - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
-zinit snippet OMZP::command-not-found
+# zinit snippet OMZP::command-not-found
 
 # Some other shorthands:
 # PZT:: (Prezto), PZTM:: (Prezto module), 
