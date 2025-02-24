@@ -1,0 +1,207 @@
+# Requirements
+# - zsh >= 5.9
+# - zinit 3.13
+#   - zsh plugin manager
+# - zoxide 0.94
+#   - better cd that remembers directories you've watched
+# - fzf 0.60.0
+# - git 2.47
+# - brew (macOS only)
+
+# Features
+# - powerlevel10k
+# - big 3 zsh plugins: autocomplete most common commands, command history completion, syntax highlighting
+# - zsh snippets using zinit (can cherry-pick prezto and ohmyzsh)
+# - fzf zsh intergrations
+# - organize to ~/.zsh.after
+# - "inbox" for unorganized scripts at the very bottom
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+### macOS homebrew (brew.sh)
+# Exports certain Homebrew paths, updates PATH, and enables autocompletion
+if command -v brew &> /dev/null; then
+  eval "$(brew shellenv)"
+fi
+
+### Added by Zinit's installer
+ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$ZINIT_HOME/zinit.zsh"
+
+# custom tag completions for zinit
+autoload -Uz _zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+# zinit light-mode for \
+#     zdharma-continuum/zinit-annex-as-monitor \
+#     zdharma-continuum/zinit-annex-bin-gem-node \
+#     zdharma-continuum/zinit-annex-patch-dl \
+#     zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+# `ice` sets the succeeding calls to add additional parameters to 1
+# depth=1 is passed to 'git clone' under the hood when installing
+zinit ice depth=1
+
+# zinit plugins I manually added here:
+zinit light romkatv/powerlevel10k
+
+## To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# The Big Three zsh plugins:
+# 1. adds syntax highlighting to the command line
+zinit light zsh-users/zsh-syntax-highlighting
+# 2. provides autocomplete functionality for the most common cli tools
+#    e.g. git, ruby, gem, etc.
+#    https://github.com/zsh-users/zsh-completions
+zinit light zsh-users/zsh-completions
+# 3. autosuggest based on your command history
+#    https://github.com/zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# Other zsh plugins
+# 1. Replace zsh's default completion selection menu with fzf! 
+zinit light Aloxaf/fzf-tab
+
+# Summary: Add in *.zsh code snippets from oh my zsh and prezto using zinit
+#
+# Typically zinit snippet <github /trunk/ url to the directory>, but
+# OMZP is shorthand for plugins defined in oh-my-zsh's github project folder:
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/
+#
+# To view all snippets in use locally
+# see `zinit snippets`
+# - requires installation of `tree` command
+zinit snippet OMZP::asdf
+zinit snippet OMZP::bundler
+zinit snippet OMZP::docker
+zinit snippet OMZP::docker-compose
+zinit snippet OMZP::git
+zinit snippet OMZP::history
+zinit snippet OMZP::rails
+zinit snippet OMZP::ruby
+# Adds a suggestion for each command not found in terminal
+# requires command-not-found
+# - https://github.com/Homebrew/homebrew-command-not-found
+#   - `brew tap homebrew/command-not-found`
+# - for other OS (e.g. termux, ubuntu) see README:
+#   - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
+zinit snippet OMZP::command-not-found
+
+# Some other shorthands:
+# PZT:: (Prezto), PZTM:: (Prezto module), 
+# OMZ:: (Oh My Zsh), OMZP:: (OMZ plugin), OMZL:: (OMZ library), OMZT:: (OMZ theme),
+# For a complete list of shorthands:
+# https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#loading-and-unloading
+
+# add cht.sh completions (in ~/.zsh.d/_cht)
+fpath=(~/.zsh.d/ $fpath)
+
+# Enables editing the terminal commands via vi mode bindings
+bindkey -v
+
+# number of commands saved in our zsh history
+HISTSIZE=5000 # # of commands stored _in_memory_
+HISTFILE=~/.zhistory
+SAVEHIST=$HISTSIZE # # of commands stored in HISTFILE
+HISTDUP=erase # erase history duplicates
+
+# append to history file instead of overwritting when the shell exits
+# ensures history is preserved from multiple shell sessions
+setopt appendhistory 
+setopt sharehistory # share history across zsh sessions _in_real_time_
+# prevent writing to history file by adding space first
+# useful for when typing sensitive and repetitive info without cluttering the history
+setopt hist_ignore_space 
+
+# The following 4 next options work together to prevent duplicate
+# commands littering the history:
+
+# 1. removes previous duplicates of a command from history, keeping only the most recent
+# useful for repetitive commands like `ls` or `. ~/.zshrc`
+setopt hist_ignore_all_dups
+# 2. prevents duplicate commands from being _saved_ in histfile when session ends
+setopt hist_save_no_dups
+# 3. prevents _consecutive_ duplicates from being saved in history
+setopt hist_ignore_dups
+# 4. prevents displaying duplicates during reverse search (CTRL+R)
+setopt hist_find_no_dups
+
+# history search for when you've already typed the beginning of a command
+# e.g. $ curl # ^ + p and ^ + n will suggest previous curl commands
+# bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# Case-insensitive completion styling
+# e.g. $ cd ~/d # tabbing will also suggest "~/Downloads"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# add color when tabbing through a completion suggestion list
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+zstyle ':completion:*' menu no
+# preview directory whenever using cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# preview directory whenever using ls
+zstyle ':fzf-tab:complete:ls:*' fzf-preview 'ls --color $realpath'
+# preview directory whenever using z / zoxide
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# Put customizations after initial shell load here
+if [ -d $HOME/.zsh.after/ ]; then
+  if [ "$(ls -A $HOME/.zsh.after/)" ]; then
+    for config_file ($HOME/.zsh.after/*.zsh); do
+      # echo "loading ${config_file}"
+      # Measure the time taken to source each file
+      # start_time=$(gdate +%s%3N)
+      source $config_file
+      # end_time=$(gdate +%s%3N)
+      #
+      # # Calculate the elapsed time in milliseconds
+      # elapsed_time=$(( (end_time - start_time) ))
+      #
+      # # Print out the time for each file
+      # echo "Time for $config_file: ${elapsed_time} ms"
+    done
+  fi
+fi
+
+# Load zsh completions (make sure this is run after all completion functions have been added)
+autoload -U compinit && compinit
+
+# TODO read how this makes loading new shell faster
+# "re-play all cached completions"
+# https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#completions-2
+zinit cdreplay -q
+
+### INBOX (insert unsorted stuff here) #################################
+
+# color ls results by default
+alias ls='ls --color'
+alias exruby='function _exd() { exercism download --track=ruby --exercise="$1"; cd ~/Exercism/ruby/"$1"; git add . ; git commit -m "init $1"; }; _exd'
+alias exrubysub='function _exd() { git add ~/Exercism/ruby; git commit -m "iterate $1"; exercism submit; }; _exd'
+alias rtest='ruby -r minitest/pride *_test.rb'
+
+## TODO
+
+# - autocomplete when I enter `nix profile` or when I enter `nix`
+# - how to make suggestions when command not found
+#   - or omzp::command-not-found work using zinit
