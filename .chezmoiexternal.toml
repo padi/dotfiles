@@ -1,0 +1,4 @@
+[".config/lazyvim"]
+type = "git-repo"
+url = "git@github.com:padi/lazyvim.git"
+refreshPeriod = "1h"
