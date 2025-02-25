@@ -201,6 +201,16 @@ alias exrubysub='function _exd() { git add ~/Exercism/ruby; git commit -m "itera
 alias rtest='ruby -r minitest/pride *_test.rb'
 alias cm='chezmoi'
 
+### neovim aliases
+# Astro Nvim - https://github.com/AstroNvim/AstroNvim
+alias avim="NVIM_APPNAME=astronvim nvim"
+alias astrovim="avim"
+# Kickstart.nvim
+alias kvim="NVIM_APPNAME=kickstart.nvim nvim"
+# Lazyvim.org
+alias lvim="NVIM_APPNAME=lazyvim nvim"
+alias lazyvim=lvim
+
 ## TODO
 
 # - autocomplete when I enter `nix profile` or when I enter `nix`
