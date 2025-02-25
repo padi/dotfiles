@@ -29,6 +29,16 @@ if command -v brew &> /dev/null; then
   eval "$(brew shellenv)"
 fi
 
+# integrate zoxide to shell
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+# Set up fzf key bindings and fuzzy completion
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
+
 ### Added by Zinit's installer
 ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -153,9 +163,6 @@ bindkey '^n' history-search-forward
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # add color when tabbing through a completion suggestion list
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
 
 zstyle ':completion:*' menu no
 # preview directory whenever using cd
