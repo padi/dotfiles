@@ -7,6 +7,8 @@
 # - fzf 0.60.0
 # - git 2.47
 # - brew (macOS only)
+# - asdf v0.16 (not below, since 0.16 is rewritten in go)
+# - go (to build asdf)
 
 # Features
 # - powerlevel10k
