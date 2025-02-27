@@ -41,6 +41,10 @@ if command -v fzf &> /dev/null; then
   source <(fzf --zsh)
 fi
 
+# add go binaries to $PATH if the directory exists
+GO_BIN="$HOME/go/bin"
+[ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
+
 ### Added by Zinit's installer
 ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -100,7 +104,6 @@ zinit light Aloxaf/fzf-tab
 # To view all snippets in use locally
 # see `zinit snippets`
 # - requires installation of `tree` command
-zinit snippet OMZP::asdf
 zinit snippet OMZP::bundler
 zinit snippet OMZP::docker
 zinit snippet OMZP::docker-compose
