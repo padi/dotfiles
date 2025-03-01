@@ -203,7 +203,7 @@ zinit cdreplay -q
 
 # color ls results by default
 alias ls='ls --color'
-alias exruby='function _exd() { exercism download --track=ruby --exercise="$1"; cd ~/Exercism/ruby/"$1"; git add . ; git commit -m "init $1"; }; _exd'
+alias exruby='function _exd() { exercism download --track=ruby --exercise="$1"; cd ~/Exercism/ruby/"$1"; git add . ; git commit -m "$1: initialized"; }; _exd'
 alias exrubysub='function _exd() { git add ~/Exercism/ruby; git commit -m "iterate $1"; exercism submit; }; _exd'
 alias rtest='ruby -r minitest/pride *_test.rb'
 alias cm='chezmoi'
