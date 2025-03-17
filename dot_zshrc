@@ -8,6 +8,7 @@
 # - git 2.47
 # - brew (macOS only)
 # - asdf v0.16 (not below, since 0.16 is rewritten in go)
+#   - might be replaced soon by devbox or mise-en-place
 # - go (to build asdf)
 
 # Features
@@ -39,6 +40,11 @@ fi
 # Set up fzf key bindings and fuzzy completion
 if command -v fzf &> /dev/null; then
   source <(fzf --zsh)
+fi
+
+# integrate mise to shell
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
 fi
 
 # add go binaries to $PATH if the directory exists
