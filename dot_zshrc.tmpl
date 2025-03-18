@@ -55,6 +55,8 @@ GO_BIN="$HOME/go/bin"
 {{- if eq .chezmoi.hostname "stratus" }}
 # this will only be included in ~/.zshrc on stratus.local
 export PATH=$PATH:$HOME/.spicetify
+# add smc to $PATH to control the fan speed
+export PATH=$PATH:/Volumes/DowngradeVentura/Applications/smcFanControl.app/Contents/Resources
 {{- end }}
 ##### END machine-specific differences to PATH #####
 
