@@ -51,13 +51,12 @@ fi
 GO_BIN="$HOME/go/bin"
 [ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
 
-# Add machine-specific differences here for $PATH
-if [[ $(hostname) == "stratus.local" ]]; then
-  # Add spicetify to $PATH
-  export PATH=$PATH:$HOME/.spicetify
-else
-  # echo "Hostname is not stratus.local"
-fi
+##### machine-specific differences to PATH #####
+{{- if eq .chezmoi.hostname "stratus" }}
+# this will only be included in ~/.zshrc on stratus.local
+export PATH=$PATH:$HOME/.spicetify
+{{- end }}
+##### END machine-specific differences to PATH #####
 
 ### Added by Zinit's installer
 ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
