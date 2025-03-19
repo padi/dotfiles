@@ -47,6 +47,10 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
 
+if command -v devbox &> /dev/null; then
+  eval "$(devbox global shellenv)"
+fi
+
 # add go binaries to $PATH if the directory exists
 GO_BIN="$HOME/go/bin"
 [ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
@@ -223,10 +227,13 @@ zinit cdreplay -q
 
 # color ls results by default
 alias ls='ls --color'
+# aliases for exercism.org - ruby track
 alias exruby='function _exd() { exercism download --track=ruby --exercise="$1"; cd ~/Exercism/ruby/"$1"; git add . ; git commit -m "$1: initialized"; }; _exd'
 alias exrubysub='function _exd() { git add ~/Exercism/ruby; git commit -m "iterate $1"; exercism submit; }; _exd'
 alias rtest='ruby -r minitest/pride *_test.rb'
+
 alias cm='chezmoi'
+alias epath='echo $PATH | tr ":" "\n" | fzf'
 
 ### neovim aliases
 # Astro Nvim - https://github.com/AstroNvim/AstroNvim
