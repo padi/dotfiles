@@ -67,6 +67,10 @@ export PATH=$PATH:$HOME/.spicetify
 # add smc to $PATH to control the fan speed
 export PATH=$PATH:/Volumes/DowngradeVentura/Applications/smcFanControl.app/Contents/Resources
 {{- end }}
+
+{{- if eq .chezmoi.hostname "cirrus" }}
+export PATH=$PATH:$HOME/.spicetify
+{{- end }}
 ##### END machine-specific differences to PATH #####
 
 ### Added by Zinit's installer
