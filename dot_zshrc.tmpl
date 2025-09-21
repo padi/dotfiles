@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 # Requirements
 # - zsh >= 5.9
 # - zinit 3.13
@@ -242,6 +244,8 @@ alias exrubysub='function _exd() { git add ~/Exercism/ruby; git commit -m "itera
 alias rtest='ruby -r minitest/pride *_test.rb'
 
 alias cm='chezmoi'
+
+# check $PATH entries via fzf
 alias epath='echo $PATH | tr ":" "\n" | fzf'
 
 ### neovim aliases
