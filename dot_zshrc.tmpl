@@ -38,6 +38,13 @@ if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv --init-hook)"
 fi
 
+# zeit for time tracking
+# https://github.com/mrusme/zeit
+# https://マリウス.com/projects/zeit/
+if command -v zeit &> /dev/null; then
+  export ZEIT_DB=~/.config/zeit.db
+fi
+
 # integrate zoxide to shell
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
@@ -73,6 +80,7 @@ export PATH=$PATH:/Volumes/DowngradeVentura/Applications/smcFanControl.app/Conte
 {{- if eq .chezmoi.hostname "cirrus" }}
 export PATH=$PATH:$HOME/.spicetify
 {{- end }}
+
 ##### END machine-specific differences to PATH #####
 
 ### Added by Zinit's installer
@@ -156,6 +164,7 @@ zinit snippet OMZP::ruby
 # https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#loading-and-unloading
 
 # add cht.sh completions (in ~/.zsh.d/_cht)
+# Oct 2025: also putting other generated completions here e.g. zeit
 fpath=(~/.zsh.d/ $fpath)
 
 # Enables editing the terminal commands via vi mode bindings
