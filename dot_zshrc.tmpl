@@ -129,6 +129,9 @@ zinit light zsh-users/zsh-completions
 #    https://github.com/zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-autosuggestions
 
+# https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 # Other zsh plugins
 # 1. Replace zsh's default completion selection menu with fzf! 
 zinit light Aloxaf/fzf-tab
