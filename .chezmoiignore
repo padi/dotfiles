@@ -1,0 +1,4 @@
+{{- if ne .chezmoi.hostname "cirrus" }}
+.config/skhd
+.config/yabai
+{{- end }}
