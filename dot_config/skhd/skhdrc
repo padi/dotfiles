@@ -1,21 +1,18 @@
+#################################
+# CONTEXT: Within Current Space
+#################################
 # Change Window Focus within Current Space
 # ----------------------------------------
-# Using HJKL
+# ... Using HJKL
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
-
-# Using Arrow Keys
+# ... Using Arrow Keys
 alt - down : yabai -m window --focus south
 alt - up : yabai -m window --focus north
 alt - left : yabai -m window --focus west
 alt - right : yabai -m window --focus east
-
-# Change External Display Focus
-# -----------------------------
-alt - s: yabai -m display --focus west
-alt - g: yabai -m display --focus east
 
 # Layout Changes
 # --------------
@@ -31,35 +28,41 @@ shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # Swap Windows
 # ------------
-# Using HJKL
+# ... Using HJKL
 shift + alt - j : yabai -m window --swap south
 shift + alt - k : yabai -m window --swap north
 shift + alt - h : yabai -m window --swap west
 shift + alt - l : yabai -m window --swap east
-# Using Arrow Keys
+# ... Using Arrow Keys
 shift + alt - down : yabai -m window --swap south
 shift + alt - up : yabai -m window --swap north
 shift + alt - left : yabai -m window --swap west
 shift + alt - right : yabai -m window --swap east
 
-# Move Window - and Split
+# Move Window and Split within currrent Space
 # -----------------------
-# Using HJKL
+# ... Using HJKL
 ctrl + alt - j : yabai -m window --warp south
 ctrl + alt - k : yabai -m window --warp north
 ctrl + alt - h : yabai -m window --warp west
 ctrl + alt - l : yabai -m window --warp east
-# Using Arrow Keys
+# ... Using Arrow Keys
 ctrl + alt - down : yabai -m window --warp south
 ctrl + alt - up : yabai -m window --warp north
 ctrl + alt - left : yabai -m window --warp west
 ctrl + alt - right : yabai -m window --warp east
 
-# Move Window - to Display Left and Right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+# Modifying Window Size
+# ---------------------
+# maximize a window
+shift + alt - m : yabai -m window --toggle zoom-fullscreen
+# balance out tree of windows (resize to occupy same area)
+shift + alt - e : yabai -m space --balance
 
-#Move Window - to Prev and Next Space
+#################################
+# CONTEXT: Between Spaces
+#################################
+# Move Window - to Prev and Next Space
 # -----------------------------------
 shift + alt - p : yabai -m window --space prev;
 shift + alt - n : yabai -m window --space next;
@@ -88,15 +91,21 @@ ctrl - 6 : yabai -m space --focus 6
 ctrl - 7 : yabai -m space --focus 7
 ctrl - 8 : yabai -m space --focus 8
 
-# Modifying Window Size
-# ---------------------
-# maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
-# balance out tree of windows (resize to occupy same area)
-shift + alt - e : yabai -m space --balance
+#################################
+# CONTEXT: Between Windows
+#################################
+# Move Window - to Display Left and Right
+shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
+shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 
-# Stop/Start/Restarting Yabai Service
-# -----------------------------------
+# Change External Display Focus
+# -----------------------------
+alt - s: yabai -m display --focus west
+alt - g: yabai -m display --focus east
+
+#################################
+# CONTEXT: Stop/Starting Yabai Service
+#################################
 ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
