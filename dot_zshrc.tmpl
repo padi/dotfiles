@@ -283,6 +283,11 @@ alias lgit='lazygit'
 # https://www.nixhub.io/packages/nodePackages.browser-sync
 alias bs='browser-sync'
 
+{{- if eq .chezmoi.hostname "cirrus" }}
+# shortcut to google-chrome
+alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
+{{- end }}
+
 ## TODO
 
 # - autocomplete when I enter `nix profile` or when I enter `nix`
