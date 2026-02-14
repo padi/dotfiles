@@ -16,6 +16,10 @@ alt - right : yabai -m window --focus east
 
 # Layout Changes
 # --------------
+# Stack all windows into full screen:
+shift + alt - s : yabai -m space --layout stack
+# Layout windows equally via Binary Space Partitioning (default layout)
+shift + alt - b : yabai -m space --layout bsp
 # Rotate Layout Clockwise
 shift + alt - r : yabai -m space --rotate 270
 # Flip along y-axis
@@ -23,7 +27,7 @@ shift + alt - y : yabai -m space --mirror y-axis
 # Flip along x-axis
 shift + alt - x : yabai -m space --mirror x-axis
 
-# Toggle Window Float
+# Toggle Window Float to middle
 shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # Swap Windows
@@ -47,10 +51,20 @@ ctrl + alt - k : yabai -m window --warp north
 ctrl + alt - h : yabai -m window --warp west
 ctrl + alt - l : yabai -m window --warp east
 # ... Using Arrow Keys
-ctrl + alt - down : yabai -m window --warp south
-ctrl + alt - up : yabai -m window --warp north
-ctrl + alt - left : yabai -m window --warp west
-ctrl + alt - right : yabai -m window --warp east
+# ctrl + alt - down : yabai -m window --warp south
+# ctrl + alt - up : yabai -m window --warp north
+# ctrl + alt - left : yabai -m window --warp west
+# ctrl + alt - right : yabai -m window --warp east
+
+# Snapping single window to grid like Rectangle.app
+# -------------------------------
+# ctrl  + alt - return    : yabai -m window --toggle float --grid 1:1:0:0:1:1 # Full screen
+# slighly better than float since it doesn't float above the windows behind them
+ctrl + alt - return     : yabai -m window --toggle zoom-fullscreen          # Full screen, but doesn't float
+ctrl  + alt - left      : yabai -m window --toggle float --grid 1:2:0:0:1:1 # Left half
+ctrl  + alt - right     : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
+ctrl  + alt - up        : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
+ctrl  + alt - down      : yabai -m window --toggle float --grid 2:1:0:1:1:1 # Bottom half
 
 # Modifying Window Size
 # ---------------------
@@ -95,13 +109,13 @@ ctrl - 8 : yabai -m space --focus 8
 # CONTEXT: Between Windows
 #################################
 # Move Window - to Display Left and Right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+# shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
+# shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 
 # Change External Display Focus
 # -----------------------------
-alt - s: yabai -m display --focus west
-alt - g: yabai -m display --focus east
+# alt - s: yabai -m display --focus west
+# alt - g: yabai -m display --focus east
 
 #################################
 # CONTEXT: Stop/Starting Yabai Service
