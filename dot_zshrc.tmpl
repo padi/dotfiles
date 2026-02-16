@@ -285,7 +285,18 @@ alias bs='browser-sync'
 
 {{- if eq .chezmoi.hostname "cirrus" }}
 # shortcut to google-chrome
-alias chrome='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"'
+
+# Sample Usage:
+# chrome google.com
+# chroment index.html
+# chromei example.com
+
+# Open with specific URL/file
+alias chrome='open -a "Google Chrome"'
+# Opens a new window, not new tab
+alias chroment='open -na "Google Chrome"'
+# Open in incognito mode
+alias chromei='open -a "Google Chrome" --args --incognito'
 {{- end }}
 
 ## TODO
