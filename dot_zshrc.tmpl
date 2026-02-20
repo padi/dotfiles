@@ -81,6 +81,13 @@ export PATH=$PATH:/Volumes/DowngradeVentura/Applications/smcFanControl.app/Conte
 export PATH=$PATH:$HOME/.spicetify
 {{- end }}
 
+{{- if eq .chezmoi.hostname "cirrus" }}
+# remove ^H when man <command> | man -l bat is entered
+export MANPAGER="sh -c 'col -bx'"
+# export MANPAGER="sh -c 'col -bx | bat -l man'"
+# Added by Antigravity
+export PATH="/Users/hawk/.antigravity/antigravity/bin:$PATH"
+{{- end }}
 ##### END machine-specific differences to PATH #####
 
 ### Added by Zinit's installer
