@@ -104,6 +104,8 @@ ctrl - 5 : yabai -m space --focus 5
 ctrl - 6 : yabai -m space --focus 6
 ctrl - 7 : yabai -m space --focus 7
 ctrl - 8 : yabai -m space --focus 8
+ctrl - left : yabai -m space --focus prev
+ctrl - right : yabai -m space --focus next
 
 #################################
 # CONTEXT: Between Windows
@@ -122,4 +124,15 @@ ctrl - 8 : yabai -m space --focus 8
 #################################
 ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
-ctrl + alt - r : yabai --restart-service
+# Reset yabai to get it "unstuck."
+# See: https://github.com/asmvik/yabai/issues/2147#issuecomment-3586014496
+ctrl + alt - r : yabai --restart-service && defaults write com.apple.universalaccess reduceMotion -bool false && defaults write com.apple.universalaccess reduceMotion -bool true
+
+# Command + Tab : Switch to Recently Previous Space/Window
+# -------------------------------------------------------
+# See: https://github.com/asmvik/yabai/issues/1235#issuecomment-1101872292
+# Reason: Default Command + Tab reliably "disables" yabai movements because of animation issues
+# Related: https://github.com/asmvik/yabai/issues/2147#issuecomment-3586014496
+#
+# Requires jq (JSON parser) command to work
+cmd - tab : recent_space=`yabai -m query --windows --window recent | jq '.space'` && recent_window=`yabai -m query --windows --window recent | jq '.id'` && yabai -m space --focus "${recent_space}" && yabai -m window --focus "${recent_window}"
