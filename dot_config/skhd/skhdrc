@@ -9,10 +9,13 @@ alt - k : yabai -m window --focus north
 alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
 # ... Using Arrow Keys
-alt - down : yabai -m window --focus south
-alt - up : yabai -m window --focus north
-alt - left : yabai -m window --focus west
-alt - right : yabai -m window --focus east
+# Cons: If this is enabled, you can't jump in
+# between words in any non-vim text editor or textbox
+# with alt + left/right
+# alt - down : yabai -m window --focus south
+# alt - up : yabai -m window --focus north
+# alt - left : yabai -m window --focus west
+# alt - right : yabai -m window --focus east
 
 # Layout Changes
 # --------------
