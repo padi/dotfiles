@@ -79,9 +79,8 @@ export PATH=$PATH:/Volumes/DowngradeVentura/Applications/smcFanControl.app/Conte
 
 {{- if eq .chezmoi.hostname "cirrus" }}
 export PATH=$PATH:$HOME/.spicetify
-{{- end }}
+export PATH=$PATH:$HOME/scripts
 
-{{- if eq .chezmoi.hostname "cirrus" }}
 # remove ^H when man <command> | man -l bat is entered
 export MANPAGER="sh -c 'col -bx'"
 # export MANPAGER="sh -c 'col -bx | bat -l man'"
