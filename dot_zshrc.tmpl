@@ -264,7 +264,7 @@ alias rtest='ruby -r minitest/pride *_test.rb'
 alias cm='chezmoi'
 
 # check $PATH entries via fzf
-alias epath='echo $PATH | tr ":" "\n" | fzf'
+alias fpath='echo $PATH | tr ":" "\n" | fzf'
 
 ### neovim aliases
 # Astro Nvim - https://github.com/AstroNvim/AstroNvim
@@ -304,6 +304,8 @@ alias chroment='open -na "Google Chrome"'
 # Open in incognito mode
 alias chromei='open -a "Google Chrome" --args --incognito'
 
+# set defaultbrowser via command line in macos
+# https://github.com/kerma/defaultbrowser
 alias db='defaultbrowser'
 {{- end }}
 
