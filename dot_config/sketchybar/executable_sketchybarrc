@@ -3,6 +3,8 @@
 # For a (much) more advanced configuration example see my dotfiles:
 # https://github.com/FelixKratz/dotfiles
 
+source "$CONFIG_DIR/font.sh"
+source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 # sketchybar has a different $path and can't find yabai installed via nix
 YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/yabai"
@@ -14,7 +16,10 @@ YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/defaul
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=24 blur_radius=30 color=0x40000000
+sketchybar --bar position=top \
+  height=24 \
+  blur_radius=30 \
+  color=$BAR_COLOR
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -24,13 +29,13 @@ sketchybar --bar position=top height=24 blur_radius=30 color=0x40000000
 default=(
   padding_left=1
   padding_right=1
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
+  icon.font="$ICON_FONT"
+  label.font="$LABEL_FONT"
+  icon.color=$WHITE
+  label.color=$WHITE
   icon.padding_left=2
-  icon.padding_right=0
-  label.padding_left=0
+  icon.padding_right=2
+  label.padding_left=2
   label.padding_right=2
 )
 sketchybar --default "${default[@]}"
@@ -50,8 +55,7 @@ for i in "${!SPACE_ICONS[@]}"; do
     icon="${SPACE_ICONS[i]}"
     icon.padding_left=4
     icon.padding_right=4
-    # background.color=0x40ffffff #grey
-    background.color=0xffffa05a #cheesy orange
+    background.color=$ITEM_BG_COLOR
     background.corner_radius=0
     background.height=25
     label.drawing=off
