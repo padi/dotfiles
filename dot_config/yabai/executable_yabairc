@@ -43,6 +43,7 @@ yabai -m rule --add app="^Keycastr$" manage=off
 yabai -m rule --add app="^Books$" manage=off
 yabai -m rule --add app="^mpv$" manage=off
 yabai -m rule --add app="^licecap$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
 
 # Temp fix for: handle native tabs properly
 # https://github.com/koekeishiya/yabai/issues/68
