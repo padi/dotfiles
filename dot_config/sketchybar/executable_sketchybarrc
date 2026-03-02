@@ -31,7 +31,7 @@ default=(
   padding_right=1
   icon.font="$ICON_FONT"
   label.font="$LABEL_FONT"
-  icon.color=$WHITE
+  icon.color=$ACCENT_COLOR
   label.color=$WHITE
   icon.padding_left=2
   icon.padding_right=2
@@ -53,6 +53,7 @@ for i in "${!SPACE_ICONS[@]}"; do
   space=(
     space="$sid"
     icon="${SPACE_ICONS[i]}"
+    icon.color=$WHITE
     icon.padding_left=4
     icon.padding_right=4
     background.color=$ITEM_BG_COLOR

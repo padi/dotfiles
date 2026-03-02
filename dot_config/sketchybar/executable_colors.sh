@@ -1,18 +1,26 @@
 #!/bin/zsh
 
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
 export WHITE=0xffffffff
 
 # -- Default Scheme
-export BAR_COLOR=0x40000000
+# export BAR_COLOR=0x40000000
 # export ITEM_BG_COLOR=0x40ffffff # grey
 
 # Cheesy Orange
-export ITEM_BG_COLOR=0xffffa05a #cheesy orange
+# export ITEM_BG_COLOR=0xffffa05a #cheesy orange
+
+# vacous2
+export BAR_COLOR=0x40101010     # black
+export ITEM_BG_COLOR=0xf9bb8000 # orange
+export ACCENT_COLOR=0xf9bb8000  # orange
 
 # -- Teal Scheme --
 # export BAR_COLOR=0xff001f30
 # export ITEM_BG_COLOR=0xff003547
-export ACCENT_COLOR=0xff2cf9ed
+# export ACCENT_COLOR=0xff2cf9ed
 
 # -- Gray Scheme --
 # export BAR_COLOR=0xff101314
