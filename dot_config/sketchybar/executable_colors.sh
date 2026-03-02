@@ -3,15 +3,15 @@
 export WHITE=0xffffffff
 
 # -- Default Scheme
-# export BAR_COLOR=0x40000000
+export BAR_COLOR=0x40000000
 # export ITEM_BG_COLOR=0x40ffffff # grey
 
 # Cheesy Orange
-# export ITEM_BG_COLOR=0xffffa05a #cheesy orange
+export ITEM_BG_COLOR=0xffffa05a #cheesy orange
 
 # -- Teal Scheme --
-export BAR_COLOR=0xff001f30
-export ITEM_BG_COLOR=0xff003547
+# export BAR_COLOR=0xff001f30
+# export ITEM_BG_COLOR=0xff003547
 export ACCENT_COLOR=0xff2cf9ed
 
 # -- Gray Scheme --
