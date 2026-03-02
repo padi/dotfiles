@@ -6,7 +6,8 @@ local config = wezterm.config_builder()
 
 -- opacity and background blur
 config.window_background_opacity = 0.9
-config.macos_window_background_blur = 5
+-- config.window_background_opacity = 1
+config.macos_window_background_blur = 20
 -- for kde and windows equivalents of a blur, use
 -- config.win32_system_backdrop
 -- config.kde_window_background_blur = true
@@ -45,11 +46,11 @@ config.initial_cols = 120
 config.initial_rows = 28
 
 -- or, changing the font size
-config.font_size = 10
+config.font_size = 12
 
 -- or changing font family + attributes
 -- See: https://wezterm.org/config/lua/wezterm/font.html?h=weight
-config.font = wezterm.font("JetBrains Mono", { weight = "ExtraBold" })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
 -- config.font = weztekm.font("Agave Nerd Font Mono")
 -- config.font = wezterm.font("Lekton Nerd Font Mono")
 -- config.font = wezterm.font("MesloLGS NF")
@@ -62,13 +63,24 @@ config.font = wezterm.font("JetBrains Mono", { weight = "ExtraBold" })
 -- or, changing the color scheme
 -- Reference:
 -- https://wezterm.org/config/lua/config/color_schemes.html
--- config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "CGA"
 -- config.color_scheme = "Catppuccin Latte"
+-- config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "Chalk"
+-- config.color_scheme = "Chalkboard"
+-- config.color_scheme = "Chester"
+-- config.color_scheme = "Cyberpunk"
+-- config.color_scheme = "Dotshare (terminal.sexy)"
+-- config.color_scheme = "Invisibone (terminal.sexy)"
+-- config.color_scheme = "DjangoRebornAgain"
+-- config.color_scheme = "Pretty and Pastel (terminal.sexy)"
 -- config.color_scheme = "Solarized Dark (Gogh)"
 -- config.color_scheme = "Solarized Dark Higher Contrast"
-config.color_scheme = "Tango Dark"
+-- config.color_scheme = "Tango Dark"
 -- config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "Tokyo Night"
+config.color_scheme = "Vacuous 2 (terminal.sexy)"
 --
 -- for a complete list of color_schemes, see:
 -- https://github.com/wezterm/wezterm/blob/main/config/src/scheme_data.rs
