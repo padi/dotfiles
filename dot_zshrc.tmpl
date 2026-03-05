@@ -104,14 +104,6 @@ source "$ZINIT_HOME/zinit.zsh"
 # custom tag completions for zinit
 autoload -Uz _zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-# zinit light-mode for \
-#     zdharma-continuum/zinit-annex-as-monitor \
-#     zdharma-continuum/zinit-annex-bin-gem-node \
-#     zdharma-continuum/zinit-annex-patch-dl \
-#     zdharma-continuum/zinit-annex-rust
-
 ### End of Zinit's installer chunk
 
 # `ice` sets the succeeding calls to add additional parameters to 1
@@ -229,17 +221,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 if [ -d $HOME/.zsh.after/ ]; then
   if [ "$(ls -A $HOME/.zsh.after/)" ]; then
     for config_file ($HOME/.zsh.after/*.zsh); do
-      # echo "loading ${config_file}"
-      # Measure the time taken to source each file
-      # start_time=$(gdate +%s%3N)
       source $config_file
-      # end_time=$(gdate +%s%3N)
-      #
-      # # Calculate the elapsed time in milliseconds
-      # elapsed_time=$(( (end_time - start_time) ))
-      #
-      # # Print out the time for each file
-      # echo "Time for $config_file: ${elapsed_time} ms"
     done
   fi
 fi
