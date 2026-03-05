@@ -11,6 +11,10 @@
 
 # Cheesy Orange
 # export ITEM_BG_COLOR=0xffffa05a #cheesy orange
+# First 2 hex chars is for opacity i.e.
+# e6 ~ 90% opacity
+# 40 ~ 25% opacity
+# 1a ~ 10% opacity
 
 # vacous2 by hal
 export WHITE=0xfffff0f0
