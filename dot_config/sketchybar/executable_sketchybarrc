@@ -18,7 +18,7 @@ YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/defaul
 
 sketchybar --bar position=top \
   height=24 \
-  blur_radius=30 \
+  blur_radius=20 \
   color=$BAR_COLOR
 
 ##### Changing Defaults #####
@@ -54,6 +54,7 @@ for i in "${!SPACE_ICONS[@]}"; do
     space="$sid"
     icon="${SPACE_ICONS[i]}"
     icon.color=$WHITE
+    icon.highlight_color=$ACCENT_COLOR
     icon.padding_left=4
     icon.padding_right=4
     background.color=$ITEM_BG_COLOR

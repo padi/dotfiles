@@ -3,7 +3,7 @@
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-export WHITE=0xffffffff
+# export WHITE=0xffffffff
 
 # -- Default Scheme
 # export BAR_COLOR=0x40000000
@@ -12,10 +12,18 @@ export WHITE=0xffffffff
 # Cheesy Orange
 # export ITEM_BG_COLOR=0xffffa05a #cheesy orange
 
-# vacous2
-export BAR_COLOR=0x40101010     # black
-export ITEM_BG_COLOR=0xf9bb8000 # orange
-export ACCENT_COLOR=0xf9bb8000  # orange
+# vacous2 by hal
+export WHITE=0xfffff0f0
+export BAR_COLOR=0x1a101010     # black
+export ITEM_BG_COLOR=0xff606060 # vacuous2 lighter grey
+export ACCENT_COLOR=0xfff9bb80 # vacuous2 orange
+
+# Peach over Orange / Orange over Peach
+# export ITEM_BG_COLOR=0xf9bb8000 # orange
+# export ACCENT_COLOR=0xF9FFCC99  # peach
+#
+# export ITEM_BG_COLOR=0xF9FFCC99 # peach
+# export ACCENT_COLOR=0xf9bb8000  # orange
 
 # -- Teal Scheme --
 # export BAR_COLOR=0xff001f30
