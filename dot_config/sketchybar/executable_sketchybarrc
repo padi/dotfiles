@@ -7,7 +7,9 @@ source "$CONFIG_DIR/font.sh"
 source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 # sketchybar has a different $path and can't find yabai installed via nix
-YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/yabai"
+# YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/yabai"
+# Use this if installed via `brew install asmvik/formulae/yabai`
+YABAI="yabai"
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
