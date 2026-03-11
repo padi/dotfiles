@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# The $SELECTED variable is available for space components and indicates if
-# the space invoking this script (with name: $NAME) is currently selected:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 source "$CONFIG_DIR/colors.sh"
 
 # Fail gracefully if dependencies are missing
@@ -71,6 +68,9 @@ fi
 # Trim trailing space
 label=$(echo "$label" | sed 's/ $//')
 
+# The $SELECTED variable is available for space components and indicates if
+# the space invoking this script (with name: $NAME) is currently selected:
+# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 sketchybar --set "$NAME" \
   icon.highlight="$SELECTED" \
   background.drawing="$SELECTED" \

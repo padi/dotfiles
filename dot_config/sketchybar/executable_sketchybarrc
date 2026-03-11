@@ -63,7 +63,7 @@ for i in "${!SPACE_ICONS[@]}"; do
     background.corner_radius=5
     background.height=25
     label.drawing=on
-    label.font="$ICON_FONT"
+    label.font="$ICON_FONT" # Make sure "label" use Nerd Font app icons
     script="$PLUGIN_DIR/space.sh"
 
     # debug with this in seperate terminal:
@@ -72,9 +72,9 @@ for i in "${!SPACE_ICONS[@]}"; do
     # click_script="logger \"SketchyBar Path: $PATH\" && $YABAI -m space --focus $sid"
     click_script="$YABAI -m space --focus $sid"
   )
-  # TODO trigger event for when the apps have switches spaces
+  # TODO trigger (custom?) event for when the apps have switches spaces
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}" \
-             --subscribe space."$sid" space_change front_app_switched
+    --subscribe space."$sid" space_change front_app_switched
 done
 
 ##### Adding Left Items #####
