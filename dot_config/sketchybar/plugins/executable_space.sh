@@ -10,6 +10,7 @@ fi
 
 get_app_icon() {
   case "$1" in
+  "Antigravity") echo "" ;;
   "Calendar") echo "󰸗" ;;
   "Code" | "VS Code" | "Visual Studio Code") echo "󰨞" ;;
   "Discord") echo "󰙯" ;;
