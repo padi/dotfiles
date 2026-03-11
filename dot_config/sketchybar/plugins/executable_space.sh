@@ -12,7 +12,7 @@ get_app_icon() {
   case "$1" in
   "Antigravity") echo "" ;;
   "Calendar") echo "󰸗" ;;
-  "Code" | "VS Code" | "Visual Studio Code") echo "󰨞" ;;
+  "Code" | "VS Code" | "Visual Studio Code" | "VSCodium") echo "󰨞" ;;
   "Discord") echo "󰙯" ;;
   "Docker" | "Docker Desktop") echo "󰡨" ;;
   "Finder") echo "󰀶" ;;
