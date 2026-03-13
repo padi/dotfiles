@@ -129,7 +129,10 @@ ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
 # Reset yabai to get it "unstuck."
 # See: https://github.com/asmvik/yabai/issues/2147#issuecomment-3586014496
-ctrl + alt - r : yabai --restart-service && defaults write com.apple.universalaccess reduceMotion -bool false && defaults write com.apple.universalaccess reduceMotion -bool true
+ctrl + alt - r : yabai --restart-service \
+&& skhd --restart-service \
+&& sketchybar --reload \
+&& defaults write com.apple.universalaccess reduceMotion -bool false && defaults write com.apple.universalaccess reduceMotion -bool true
 
 # Command + Tab : Switch to Recently Previous Space/Window
 # -------------------------------------------------------
