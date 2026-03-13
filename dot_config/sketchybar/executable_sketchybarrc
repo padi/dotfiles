@@ -73,8 +73,9 @@ for i in "${!SPACE_ICONS[@]}"; do
     click_script="$YABAI -m space --focus $sid"
   )
   # TODO trigger (custom?) event for when the apps have switches spaces
-  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}" \
-    --subscribe space."$sid" space_change front_app_switched
+  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+  #\
+  # --subscribe space."$sid" space_change front_app_switched
 done
 
 ##### Adding Left Items #####
