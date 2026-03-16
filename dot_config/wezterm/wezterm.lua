@@ -5,8 +5,8 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- opacity and background blur
-config.window_background_opacity = 0.9
--- config.window_background_opacity = 1
+-- config.window_background_opacity = 0.9
+config.window_background_opacity = 1
 config.macos_window_background_blur = 20
 -- for kde and windows equivalents of a blur, use
 -- config.win32_system_backdrop
