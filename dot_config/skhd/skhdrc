@@ -31,7 +31,7 @@ shift + alt - y : yabai -m space --mirror y-axis
 shift + alt - x : yabai -m space --mirror x-axis
 
 # Toggle Window Float to middle
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+shift + alt - t : yabai -m window --toggle float --grid 12:12:1:1:10:10
 
 # Swap Windows
 # ------------
