@@ -10,8 +10,11 @@ fi
 
 get_app_icon() {
   case "$1" in
+  "1Password") echo "" ;;
   "Antigravity") echo "" ;;
+  "Bitwarden") echo "" ;;
   "Calendar") echo "󰸗" ;;
+  "Claude") echo "" ;;
   "Code" | "VS Code" | "Visual Studio Code" | "VSCodium") echo "󰨞" ;;
   "Discord") echo "󰙯" ;;
   "Docker" | "Docker Desktop") echo "󰡨" ;;
@@ -19,7 +22,9 @@ get_app_icon() {
   "Firefox") echo "" ;;
   "Floorp") echo "󰯺" ;;
   "Google Chrome" | "Chrome") echo "" ;;
+  "KeePassXC") echo "" ;;
   "Keynote") echo "󰐨" ;;
+  "LastPass") echo "" ;;
   "Mail") echo "" ;;
   "Messages") echo "󰭹" ;;
   "Microsoft Excel") echo "󱎏" ;;
