@@ -63,10 +63,6 @@ if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv)"
 fi
 
-# add go binaries to $PATH if the directory exists
-GO_BIN="$HOME/go/bin"
-[ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
-
 ##### machine-specific differences to PATH #####
 {{- if eq .chezmoi.hostname "stratus" }}
 # this will only be included in ~/.zshrc on stratus.local
