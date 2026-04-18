@@ -95,7 +95,7 @@ shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 shift + alt - 8 : yabai -m window --space 8;
 
-# Focus to a different Desktop/Space
+# Focus to a different Desktop/Space - Mission Control Replacmeent
 # --------------------------------------
 # need to disable System Preferences > Keyboard >
 # Shortcuts > Mission Control > Switch to Desktop 1..7
