@@ -313,13 +313,13 @@ alias db='defaultbrowser'
 # - how to make suggestions when command not found
 #   - or omzp::command-not-found work using zinit
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # bun executables path
 if [ -d "$HOME/.bun" ]; then
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
+
+  # bun completions
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 fi
 
 # Added by Antigravity
