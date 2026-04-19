@@ -63,6 +63,10 @@ if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv)"
 fi
 
+# add go binaries to $PATH if the directory exists
+GO_BIN="$HOME/go/bin"
+[ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
+
 ##### machine-specific differences to PATH #####
 {{- if eq .chezmoi.hostname "stratus" }}
 # this will only be included in ~/.zshrc on stratus.local
@@ -76,8 +80,8 @@ export PATH=$PATH:$HOME/.spicetify
 export PATH=$PATH:$HOME/scripts
 
 # remove ^H when man <command> | man -l bat is entered
-export MANPAGER="sh -c 'col -bx'"
-# export MANPAGER="sh -c 'col -bx | bat -l man'"
+# export MANPAGER="sh -c 'col -bx'"
+export MANPAGER="sh -c 'col -bx | bat -l man'"
 # Added by Antigravity
 export PATH="/Users/hawk/.antigravity/antigravity/bin:$PATH"
 
@@ -92,11 +96,11 @@ export PATH="$HOME/.local/bin:$PATH"
 ### Added by Zinit's installer
 ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+  command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME" && \
+    print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    print -P "%F{160} The clone has failed.%f%b"
 fi
 
 source "$ZINIT_HOME/zinit.zsh"
@@ -131,7 +135,7 @@ zinit light zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Other zsh plugins
-# 1. Replace zsh's default completion selection menu with fzf! 
+# 1. Replace zsh's default completion selection menu with fzf!
 zinit light Aloxaf/fzf-tab
 
 # Summary: Add in *.zsh code snippets from oh my zsh and prezto using zinit
@@ -160,7 +164,7 @@ zinit snippet OMZP::npm
 # zinit snippet OMZP::command-not-found
 
 # Some other shorthands:
-# PZT:: (Prezto), PZTM:: (Prezto module), 
+# PZT:: (Prezto), PZTM:: (Prezto module),
 # OMZ:: (Oh My Zsh), OMZP:: (OMZ plugin), OMZL:: (OMZ library), OMZT:: (OMZ theme),
 # For a complete list of shorthands:
 # https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#loading-and-unloading
@@ -180,11 +184,11 @@ HISTDUP=erase # erase history duplicates
 
 # append to history file instead of overwritting when the shell exits
 # ensures history is preserved from multiple shell sessions
-setopt appendhistory 
+setopt appendhistory
 setopt sharehistory # share history across zsh sessions _in_real_time_
 # prevent writing to history file by adding space first
 # useful for when typing sensitive and repetitive info without cluttering the history
-setopt hist_ignore_space 
+setopt hist_ignore_space
 
 # The following 4 next options work together to prevent duplicate
 # commands littering the history:
@@ -251,12 +255,23 @@ alias fpath='echo $PATH | tr ":" "\n" | fzf'
 
 ### neovim aliases
 # Astro Nvim - https://github.com/AstroNvim/AstroNvim
+# ---------------------------------------------------=
 alias avim="NVIM_APPNAME=astronvim nvim"
 alias astrovim="avim"
 # Kickstart.nvim
+# --------------
 alias kvim="NVIM_APPNAME=kickstart.nvim nvim"
 # Lazyvim.org
-alias lvim="NVIM_APPNAME=lazyvim nvim"
+# -----------
+# alias lvim="NVIM_APPNAME=lazyvim nvim"
+# modiified lazyvim such that it accept -t as filetype and passes other params to nvim
+lvim() {
+  if [[ "$1" == "-t" ]]; then
+    NVIM_APPNAME=lazyvim nvim -c "set filetype=$2" "${@:3}"
+  else
+    NVIM_APPNAME=lazyvim nvim "$@"
+  fi
+}
 alias lazyvim=lvim
 
 ### fzf alias to open file
@@ -297,3 +312,15 @@ alias db='defaultbrowser'
 # - autocomplete when I enter `nix profile` or when I enter `nix`
 # - how to make suggestions when command not found
 #   - or omzp::command-not-found work using zinit
+
+# bun completions
+[ -s "/Users/hawk/.bun/_bun" ] && source "/Users/hawk/.bun/_bun"
+
+# bun executables path
+if [ -d "$HOME/.bun" ]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# Added by Antigravity
+export PATH="/Users/hawk/.antigravity/antigravity/bin:$PATH"
