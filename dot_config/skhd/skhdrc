@@ -94,6 +94,7 @@ shift + alt - 5 : yabai -m window --space 5;
 shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 shift + alt - 8 : yabai -m window --space 8;
+shift + alt - 9 : yabai -m window --space 9;
 
 # Focus to a different Desktop/Space - Mission Control Replacmeent
 # --------------------------------------
@@ -107,8 +108,17 @@ ctrl - 5 : yabai -m space --focus 5
 ctrl - 6 : yabai -m space --focus 6
 ctrl - 7 : yabai -m space --focus 7
 ctrl - 8 : yabai -m space --focus 8
-ctrl - left : yabai -m space --focus prev
-ctrl - right : yabai -m space --focus next
+ctrl - 9 : yabai -m space --focus 9
+# DISABLED - Move to left/right space
+# --- disabled because while it's fast, it's unreliable. To reproduce error:
+# 1. open https://google.com (or any html file)
+# 2. it opens in a browser that is in a different space
+# 3. switch to that space (works)
+# 4. any further yabai -m space --focus 1/2/3... leads to error message:
+# "cannot focus space because the display is in the middle of an animation."
+# See: https://github.com/asmvik/yabai/issues/2147
+# ctrl - left : yabai -m space --focus prev
+# ctrl - right : yabai -m space --focus next
 
 #################################
 # CONTEXT: Between Windows
