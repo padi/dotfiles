@@ -91,6 +91,8 @@ export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 # Claude Code
 export PATH="$HOME/.local/bin:$PATH"
 {{- end }}
+# claude-or is a personal Claude Code wrapper that uses Openrouter as the backend
+export PATH="$HOME/claude-or/:$PATH"
 ##### END machine-specific differences to PATH #####
 
 ### Added by Zinit's installer
@@ -224,11 +226,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Put customizations after initial shell load here
 if [ -d $HOME/.zsh.after/ ]; then
-  if [ "$(ls -A $HOME/.zsh.after/)" ]; then
-    for config_file ($HOME/.zsh.after/*.zsh); do
-      source $config_file
-    done
-  fi
+  for config_file ($HOME/.zsh.after/*.zsh); do
+    [[ -f "$config_file" ]] && source "$config_file"
+  done
 fi
 
 # Load zsh completions (make sure this is run after all completion functions have been added)
