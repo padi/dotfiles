@@ -47,6 +47,7 @@ get_app_icon() {
   "Telegram") echo "" ;;
   "Terminal") echo "󰆍" ;;
   "VLC") echo "󰕼" ;;
+  "Viber") echo "" ;;
   "WezTerm") echo "󰆍" ;;
   "WhatsApp") echo "󰭹" ;;
   "Zoom") echo "󰬡" ;;
