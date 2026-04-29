@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local toggle_color_scheme = require("toggle_color_scheme")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -61,27 +62,9 @@ config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
 -- https://wezterm.org/confpig/lua/wezterm/nerdfonts.html
 
 -- or, changing the color scheme
--- Reference:
--- https://wezterm.org/config/lua/config/color_schemes.html
--- config.color_scheme = "CGA"
--- config.color_scheme = "Catppuccin Latte"
--- config.color_scheme = "Catppuccin Macchiato"
--- config.color_scheme = "Catppuccin Mocha"
--- config.color_scheme = "Chalk"
--- config.color_scheme = "Chalkboard"
--- config.color_scheme = "Chester"
--- config.color_scheme = "Cyberpunk"
--- config.color_scheme = "Dotshare (terminal.sexy)"
--- config.color_scheme = "Invisibone (terminal.sexy)"
--- config.color_scheme = "DjangoRebornAgain"
--- config.color_scheme = "Pretty and Pastel (terminal.sexy)"
--- config.color_scheme = "Solarized Dark (Gogh)"
--- config.color_scheme = "Solarized Dark Higher Contrast"
--- config.color_scheme = "Tango Dark"
--- config.color_scheme = "Tokyo Night Moon"
--- config.color_scheme = "Tokyo Night"
-config.color_scheme = "Vacuous 2 (terminal.sexy)"
---
+
+toggle_color_scheme.apply_to_config(config)
+
 -- for a complete list of color_schemes, see:
 -- https://github.com/wezterm/wezterm/blob/main/config/src/scheme_data.rs
 
