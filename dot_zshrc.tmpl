@@ -139,6 +139,9 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # Other zsh plugins
 # 1. Replace zsh's default completion selection menu with fzf!
 zinit light Aloxaf/fzf-tab
+# 2. pnpm aliases inspired by oh-my-zsh plugins https://github.com/ntnyq/omz-plugin-pnpm
+zinit light ntnyq/omz-plugin-pnpm
+unalias pi # get all pnpm shortcuts except this
 
 # Summary: Add in *.zsh code snippets from oh my zsh and prezto using zinit
 #
@@ -157,6 +160,7 @@ zinit snippet OMZP::history
 zinit snippet OMZP::rails
 zinit snippet OMZP::ruby
 zinit snippet OMZP::npm
+
 # Adds a suggestion for each command not found in terminal
 # requires command-not-found
 # - https://github.com/Homebrew/homebrew-command-not-found
@@ -329,3 +333,31 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+#compdef pnpm
+###-begin-pnpm-completion-###
+if type compdef &>/dev/null; then
+  _pnpm_completion () {
+    local reply
+    local si=$IFS
+
+    IFS=$'\n' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" SHELL=zsh pnpm completion-server -- "${words[@]}"))
+    IFS=$si
+
+    if [ "$reply" = "__tabtab_complete_files__" ]; then
+      _files
+    else
+      _describe 'values' reply
+    fi
+  }
+  # When called by the Zsh completion system, this will end with
+  # "loadautofunc" when initially autoloaded and "shfunc" later on, otherwise,
+  # the script was "eval"-ed so use "compdef" to register it with the
+  # completion system
+  if [[ $zsh_eval_context == *func ]]; then
+    _pnpm_completion "$@"
+  else
+    compdef _pnpm_completion pnpm
+  fi
+fi
+###-end-pnpm-completion-###
