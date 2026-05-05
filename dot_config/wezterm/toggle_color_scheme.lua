@@ -46,16 +46,15 @@ function module.apply_to_config(config)
 	config.color_scheme = load_color_scheme()
 
 	config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 1000 }
-	config.keys = {
-		{
-			key = "c",
-			mods = "LEADER|CTRL",
-			action = wezterm.action.Multiple({
-				wezterm.action.EmitEvent("toggle-color-scheme"),
-				wezterm.action.ReloadConfiguration,
-			}),
-		},
-	}
+	config.keys = config.keys or {}
+	table.insert(config.keys, {
+		key = "c",
+		mods = "LEADER|CTRL",
+		action = wezterm.action.Multiple({
+			wezterm.action.EmitEvent("toggle-color-scheme"),
+			wezterm.action.ReloadConfiguration,
+		}),
+	})
 end
 
 wezterm.on("toggle-color-scheme", function(_window, _pane)
