@@ -45,7 +45,7 @@ end
 function module.apply_to_config(config)
 	config.color_scheme = load_color_scheme()
 
-	config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
+	config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 1000 }
 	config.keys = {
 		{
 			key = "c",
