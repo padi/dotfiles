@@ -60,6 +60,14 @@ get_app_icon() {
 # Get the space ID from the name (e.g., space.1 -> 1)
 sid="${NAME#*.}"
 
+# Determine if this space is selected using yabai as the source of truth
+# This avoids race conditions where sketchybar's $SELECTED variable is stale
+current_sid=$(yabai -m query --spaces --space | jq '.index')
+SELECTED_LOCAL="off"
+if [ "$sid" -eq "$current_sid" ]; then
+  SELECTED_LOCAL="on"
+fi
+
 # Query yabai for windows in the current space
 # Note: We need to filter out windows that don't have an app name (e.g. system windows)
 apps=$(yabai -m query --windows --space "$sid" | jq -r '.[].app' | sort -u)
@@ -79,8 +87,8 @@ label=$(echo "$label" | sed 's/ $//')
 # the space invoking this script (with name: $NAME) is currently selected:
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 sketchybar --set "$NAME" \
-  icon.highlight="$SELECTED" \
-  background.drawing="$SELECTED" \
+  icon.highlight="$SELECTED_LOCAL" \
+  background.drawing="$SELECTED_LOCAL" \
   label="$label" \
   label.padding_left=4 \
   label.padding_right=8 \
