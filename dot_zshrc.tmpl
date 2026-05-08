@@ -311,6 +311,11 @@ alias chromei='open -a "Google Chrome" --args --incognito'
 alias db='defaultbrowser'
 {{- end }}
 
+{{- if eq .chezmoi.os "darwin" }}
+# brew but don't auto-update
+alias nobrew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+{{- end }}
+
 ## TODO
 
 # - autocomplete when I enter `nix profile` or when I enter `nix`
