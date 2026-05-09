@@ -87,10 +87,11 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # Obsidian.app CLI
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
-
-# Claude Code
-export PATH="$HOME/.local/bin:$PATH"
 {{- end }}
+
+# Claude Code, getnf and other user-installed binaries
+export PATH="$HOME/.local/bin:$PATH"
+
 # claude-or is a personal Claude Code wrapper that uses Openrouter as the backend
 export PATH="$HOME/claude-or/:$PATH"
 ##### END machine-specific differences to PATH #####
