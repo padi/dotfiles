@@ -336,8 +336,8 @@ fi
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   # pnpm v10
-  # *":$PNPM_HOME:"*) ;;
-  # *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
   # pnpm v11
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
