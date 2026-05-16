@@ -50,12 +50,19 @@ config.font_size = 12
 
 -- or changing font family + attributes
 -- See: https://wezterm.org/config/lua/wezterm/font.html?h=weight
-config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
--- config.font = weztekm.font("Agave Nerd Font Mono")
+-- Use `getnf` command to get other NerdFonts see: github.com/getnf/getnf
+-- config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold" })
+-- config.font = wezterm.font("RobotoMono Nerd Font", { weight = "Bold" })
+-- config.font = wezterm.font("Agave Nerd Font Mono")
 -- config.font = wezterm.font("Lekton Nerd Font Mono")
 -- config.font = wezterm.font("MesloLGS NF")
 -- config.font = wezterm.font("MesloLGS Nerd Font Mono")
---
+-- IBM-like Nostalgia
+-- config.font = wezterm.font("BigBlueTermPlus Nerd Font")
+-- Modern Windows Terminal
+-- config.font = wezterm.font("CaskaydiaCove Nerd Font")
+-- Monospaced pixel font with a lo-fi, techy vibe
+config.font = wezterm.font("DepartureMono Nerd Font", { weight = "Regular" })
 -- P.S. You don't need to install nerd fonts in Wezterm,
 -- because for other fonts, there's a default font fallback
 -- https://wezterm.org/confpig/lua/wezterm/nerdfonts.html
