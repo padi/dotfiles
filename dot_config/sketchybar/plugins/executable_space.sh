@@ -12,6 +12,7 @@ get_app_icon() {
   case "$1" in
   "1Password") echo "" ;;
   "Antigravity") echo "" ;;
+  "Antigravity IDE") echo "" ;;
   "Bitwarden") echo "" ;;
   "Calendar") echo "󰸗" ;;
   "Claude") echo "" ;;
