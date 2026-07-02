@@ -43,6 +43,7 @@ get_app_icon() {
   "Signal") echo "󱋊" ;;
   "Slack") echo "" ;;
   "Spotify") echo "" ;;
+  "Steam") echo "" ;;
   "Sublime Text") echo "󰅳" ;;
   "System Settings") echo "󰒓" ;;
   "Telegram") echo "" ;;
