@@ -13,6 +13,7 @@ get_app_icon() {
   "1Password") echo "" ;;
   "Antigravity") echo "" ;;
   "Antigravity IDE") echo "" ;;
+  "Backblaze") echo "󰈸" ;;
   "Bitwarden") echo "" ;;
   "Calendar") echo "󰸗" ;;
   "Claude") echo "" ;;
