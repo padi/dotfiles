@@ -63,6 +63,12 @@ config.font_size = 12
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font")
 -- Monospaced pixel font with a lo-fi, techy vibe
 config.font = wezterm.font("DepartureMono Nerd Font", { weight = "Regular" })
+--- Bitmap font, tall capitals and ascenders, small serifs
+--- config.font = wezterm.font("GohuFont 14 Nerd Font", { weight = "Regular" })
+--- Font from Evil Martians (Rails Agency)
+--- config.font = wezterm.font("MartianMono Nerd Font", { weight = "Regular" })
+--- Designed particularly for use at small point sizes
+--- config.font = wezterm.font("ProggyClean Nerd Font", { weight = "Regular" })
 -- P.S. You don't need to install nerd fonts in Wezterm,
 -- because for other fonts, there's a default font fallback
 -- https://wezterm.org/confpig/lua/wezterm/nerdfonts.html
