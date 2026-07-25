@@ -23,20 +23,20 @@ config.keys = config.keys or {}
 -- CMD+W already does CloseCurrentTab by default,
 -- we just want to disable confirming this
 table.insert(config.keys, {
-    key = "w",
-    mods = "CMD",
-    action = wezterm.action.CloseCurrentTab({ confirm = false }),
+	key = "w",
+	mods = "CMD",
+	action = wezterm.action.CloseCurrentTab({ confirm = false }),
 })
 -- map hotkey for moving tabs similar to iTerm
 table.insert(config.keys, {
-    key = "LeftArrow",
-    mods = "CMD|SHIFT",
-    action = wezterm.action.MoveTabRelative(-1),
+	key = "LeftArrow",
+	mods = "CMD|SHIFT",
+	action = wezterm.action.MoveTabRelative(-1),
 })
 table.insert(config.keys, {
-    key = "RightArrow",
-    mods = "CMD|SHIFT",
-    action = wezterm.action.MoveTabRelative(1),
+	key = "RightArrow",
+	mods = "CMD|SHIFT",
+	action = wezterm.action.MoveTabRelative(1),
 })
 
 -- This is where you actually apply your config choices.
