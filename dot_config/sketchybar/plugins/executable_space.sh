@@ -27,6 +27,7 @@ get_app_icon() {
   "KeePassXC") echo "" ;;
   "Keynote") echo "󰐨" ;;
   "LastPass") echo "" ;;
+  "MacYTDL") echo "" ;;
   "Mail") echo "" ;;
   "Messages") echo "󰭹" ;;
   "Microsoft Excel") echo "󱎏" ;;
