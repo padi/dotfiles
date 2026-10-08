@@ -32,6 +32,7 @@ if command -v brew &> /dev/null; then
   eval "$(brew shellenv)"
 fi
 
+# integrate devbox to shell
 if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv --init-hook)"
 fi
@@ -56,11 +57,6 @@ fi
 # integrate mise to shell
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
-fi
-
-# integrate devbox to shell
-if command -v devbox &> /dev/null; then
-  eval "$(devbox global shellenv)"
 fi
 
 # add go binaries to $PATH if the directory exists
