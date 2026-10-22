@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# mise-gh-token.sh
+# Checks for mise and gh, then exports MISE_GITHUB_TOKEN.
+# Compatible with bash and zsh.
+#
+# Usage (source it so the export persists in your shell):
+#   source /path/to/mise-gh-token.sh
+#
+# Add to ~/.zshrc or ~/.bashrc:
+#   source /path/to/mise-gh-token.sh
+
+# ---- Helper: check if a command exists ----
+_has_cmd() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# ---- Check for `mise` ----
+if ! _has_cmd mise; then
+  echo "Error: 'mise' is not installed or not in PATH." >&2
+  echo "       Install it from https://mise.jdx.dev/" >&2
+  return 1 2>/dev/null || exit 1
+fi
+
+# ---- Check for `gh` ----
+if ! _has_cmd gh; then
+  echo "Error: 'gh' (GitHub CLI) is not installed or not in PATH." >&2
+  echo "       Install it from https://cli.github.com/" >&2
+  return 1 2>/dev/null || exit 1
+fi
+
+# ---- Check that gh is authenticated ----
+if ! gh auth status >/dev/null 2>&1; then
+  echo "Error: 'gh' is not authenticated. Run 'gh auth login' first." >&2
+  return 1 2>/dev/null || exit 1
+fi
+
+# ---- Fetch token and export ----
+_token=$(gh auth token 2>/dev/null)
+if [ -z "$_token" ]; then
+  echo "Error: failed to retrieve token from 'gh auth token'." >&2
+  unset _token
+  return 1 2>/dev/null || exit 1
+fi
+
+export MISE_GITHUB_TOKEN="$_token"
+unset _token
+
+echo "MISE_GITHUB_TOKEN exported successfully." >&2
