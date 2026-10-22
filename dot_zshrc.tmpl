@@ -59,6 +59,12 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
 
+# use github auth token for when installing via mise
+# alleviates gihtub rate limits
+if command -v gh >/dev/null 2>&1; then
+  export MISE_GITHUB_TOKEN=$(gh auth token)
+fi
+
 # add go binaries to $PATH if the directory exists
 GO_BIN="$HOME/go/bin"
 [ -d "$GO_BIN" ] && export PATH="$GO_BIN:$PATH"
@@ -367,3 +373,9 @@ fi
 
 ## Added by Antigravity IDE
 export PATH="/Users/hawk/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Added by DevRelay installer
+export PATH="$HOME/.devrelay/bin:$PATH"
+
+# Added by backboard.io
+export PATH="/Users/hawk/.backboard/bin:$PATH"
