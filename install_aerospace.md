@@ -8,6 +8,7 @@
 ---
 
 ## 1. Verify aerospace installation
+
 ```bash
 aerospace --version   # → should output version 0.21.3-Beta or newer
 aerospace list-workspaces --all # → should list workspaces (server may need to start)
@@ -16,6 +17,7 @@ aerospace list-workspaces --all # → should list workspaces (server may need to
 ---
 
 ## 2. Set up default aerospace config
+
 Create `~/.config/aerospace/default-config.toml` (chezmoi source:
 `dot_config/aerospace/default-config.toml`) with:
 
@@ -53,6 +55,7 @@ Replace the removed yabai bindings with aerospace CLI equivalents.
 Only the essential, minimal set is included below:
 
 ### Within Current Workspace — Focus
+
 ```sh
 alt - j : aerospace focus down
 alt - k : aerospace focus up
@@ -61,11 +64,13 @@ alt - l : aerospace focus right
 ```
 
 ### Layout Changes
+
 ```sh
 alt - b : aerospace layout bsp          # Binary Space Partitioning (default)
 ```
 
 ### Swap Windows
+
 ```sh
 shift + alt - j : aerospace swap down
 shift + alt - k : aerospace swap up
@@ -74,6 +79,7 @@ shift + alt - l : aerospace swap right
 ```
 
 ### Move Window between Workspaces
+
 ```sh
 ctrl - 1 : aerospace workspace 1
 ctrl - 2 : aerospace workspace 2
@@ -87,12 +93,14 @@ ctrl - 9 : aerospace workspace 9
 ```
 
 ### Restart skhd / reload sketchybar
+
 ```sh
 ctrl + alt - r : skhd --restart-service \
 && sketchybar --reload
 ```
 
 ### Command-Tab → Recent Workspace/Window (requires jq)
+
 ```sh
 cmd - tab : recent_space=`aerospace list-windows --all --format json | jq -r '.[] | select(.focused) | .workspace'` && \
   recent_window=`aerospace list-windows --all --format json | jq -r '.[] | select(.focused) | .id'` && \
@@ -104,6 +112,7 @@ cmd - tab : recent_space=`aerospace list-windows --all --format json | jq -r '.[
 ---
 
 ## 4. Update sketchybar space plugin
+
 Edit `dot_config/sketchybar/plugins/executable_space.sh` to replace the
 commented-out yabai queries with aerospace CLI commands.
 
@@ -145,6 +154,7 @@ After editing: `sketchybar --reload` (or let it reload on event).
 ---
 
 ## 5. Minor: Update sketchybar bar config (optional)
+
 `dot_config/sketchybar/executable_sketchybarrc` has a commented-out space
 loop and a `YABAI` variable reference. For minimal setup these can remain
 as-is; the space plugin now uses `aerospace` directly. If you want to enable
@@ -183,10 +193,10 @@ No further action needed.
 
 ## Summary of file changes
 
-| File | Change |
-|---|---|
-| `dot_config/aerospace/default-config.toml` | **Create** — gap, mouse, layout config |
-| `dot_config/skhd/skhdrc` | **Edit** — aerospace keybindings (replace yabai) |
-| `dot_config/sketchybar/plugins/executable_space.sh` | **Edit** — aerospace workspace queries (replace yabai) |
-| `dot_config/sketchybar/executable_sketchybarrc` | Optional — enable space items loop |
+| File                                                                         | Change                                                 |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `dot_config/aerospace/default-config.toml`                                   | **Create** — gap, mouse, layout config                 |
+| `dot_config/skhd/skhdrc`                                                     | **Edit** — aerospace keybindings (replace yabai)       |
+| `dot_config/sketchybar/plugins/executable_space.sh`                          | **Edit** — aerospace workspace queries (replace yabai) |
+| `dot_config/sketchybar/executable_sketchybarrc`                              | Optional — enable space items loop                     |
 | No changes needed to `dot_config/sketchybar/plugins/executable_front_app.sh` |

@@ -1,8 +1,37 @@
-# skhd hotkey daemon config — yabai bindings removed
-#
-# All previous bindings delegated window/space management to `yabai -m ...`.
-# yabai has been uninstalled; skhd remains installed and running.
-#
-# To add your own hotkey bindings later (e.g. for use with aerospace or a
-# custom workflow), edit this file and restart skhd:
-#   skhd --restart-service
+# skhd hotkey daemon config — aerospace bindings
+
+### Within Current Workspace — Focus
+alt - j : aerospace focus down
+alt - k : aerospace focus up
+alt - h : aerospace focus left
+alt - l : aerospace focus right
+
+### Layout Changes
+alt - b : aerospace layout bsp          # Binary Space Partitioning (default)
+
+### Swap Windows
+shift + alt - j : aerospace swap down
+shift + alt - k : aerospace swap up
+shift + alt - h : aerospace swap left
+shift + alt - l : aerospace swap right
+
+### Move Window between Workspaces
+ctrl - 1 : aerospace workspace 1
+ctrl - 2 : aerospace workspace 2
+ctrl - 3 : aerospace workspace 3
+ctrl - 4 : aerospace workspace 4
+ctrl - 5 : aerospace workspace 5
+ctrl - 6 : aerospace workspace 6
+ctrl - 7 : aerospace 7
+ctrl - 8 : aerospace workspace 8
+ctrl - 9 : aerospace workspace 9
+
+### Restart skhd / reload sketchybar
+ctrl + alt - r : skhd --restart-service \
+&& sketchybar --reload
+
+### Command-Tab → Recent Workspace/Window (requires jq)
+cmd - tab : recent_space=`aerospace list-windows --all --format json | jq -r '.[] | select(.focused) | .workspace'` && \
+  recent_window=`aerospace list-windows --all --format json | jq -r '.[] | select(.focused) | .id'` && \
+  aerospace focus --window-id "${recent_window}" && aerospace workspace "${recent_space}"
+

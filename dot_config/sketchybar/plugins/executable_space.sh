@@ -3,10 +3,9 @@
 source "$CONFIG_DIR/colors.sh"
 
 # Fail gracefully if dependencies are missing
-# Commented out yabai dependency - will be re-enabled when aerospace is installed
-# if ! command -v jq &>/dev/null || ! command -v yabai &>/dev/null; then
-#   sketchybar --set "$NAME" label.drawing=off
-#   exit 0
+if ! command -v jq &>/dev/null || ! command -v aerospace &>/dev/null; then
+  sketchybar --set "$NAME" label.drawing=off
+  exit 0
 
 get_app_icon() {
   case "$1" in
@@ -64,17 +63,20 @@ get_app_icon() {
 # Get the space ID from the name (e.g., space.1 -> 1)
 sid="${NAME#*.}"
 
-# Determine if this space is selected using yabai as the source of truth
+# Determine if this space is selected using aerospace as the source of truth
 # This avoids race conditions where sketchybar's $SELECTED variable is stale
-# current_sid=$(yabai -m query --spaces --space | jq '.index')  # yabai removed
+# Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
+# Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
+current_sid=$(aerospace list-workspaces --focused --json | jq -r '.[0].workspace')
 SELECTED_LOCAL="off"
 if [ "$sid" -eq "$current_sid" ]; then
   SELECTED_LOCAL="on"
 fi
 
-# Query yabai for windows in the current space
+# Query aerospace for windows in the current workspace
+# Note: Use --workspace "$sid" to query the specific workspace the plugin is rendering
 # Note: We need to filter out windows that don't have an app name (e.g. system windows)
-# apps=$(yabai -m query --windows --space "$sid" | jq -r '.[].app' | sort -u)  # yabai removed
+apps=$(aerospace list-windows --workspace "$sid" --json | jq -r '.[].app' | sort -u)
 
 label=""
 if [ -n "$apps" ]; then
