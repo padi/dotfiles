@@ -43,12 +43,20 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
-# Space items have been removed as they depended on yabai.
-# To re-enable with aerospace, uncomment the space loop below and adapt
-# the click_script to use `aerospace list-spaces` / `aerospace focus-window`.
+# AeroSpace numbered workspaces 1-9
+# Each space item maps to an AeroSpace workspace ID.
+# click_script focuses the workspace; script ($PLUGIN_DIR/space.sh) shows apps + highlight.
+for sid in 1 2 3 4 5 6 7 8 9; do
+  sketchybar --add item space.$sid left \
+    --set space.$sid \
+      icon=$sid \
+      click_script="aerospace workspace $sid" \
+      script="$PLUGIN_DIR/space.sh" \
+      label.padding_left=4 \
+      label.padding_right=8 \
+      label.drawing=on \
+    --subscribe space.$sid focused-workspace-changed
+done
 
 ##### Adding Left Items #####
 # We add some regular items to the left side of the bar, where
