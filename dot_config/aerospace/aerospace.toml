@@ -2,10 +2,15 @@
 # AeroSpace configuration (managed by chezmoi)
 # See: https://github.com/nikitabobko/AeroSpace
 
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
 # -----------------------------------------------------------------------------
 # Default layout
 # -----------------------------------------------------------------------------
-layout = "bsp"
+default-root-container-layout = 'tiles'
 
 # -----------------------------------------------------------------------------
 # Padding / gaps
@@ -20,68 +25,61 @@ layout = "bsp"
 # gap = 24 # uncomment to reserve top area for sketchybar
 gaps.outer.top = 25
 
-# -----------------------------------------------------------------------------
-# Mouse settings (same modifier as original yabai/skhd)
-# -----------------------------------------------------------------------------
-[mouse]
-modifier = "alt"
-action1 = "move"
-action2 = "resize"
-
+# TODO: Remove me or reimplement in aeropsace
 # -----------------------------------------------------------------------------
 # Window rules (manage = false for apps that should float)
 # -----------------------------------------------------------------------------
-[[rule]]
-app = "^System Preferences$"
-manage = false
-
-[[rule]]
-app = "^System Settings$"
-manage = false
-
-[[rule]]
-app = "^Calculator$"
-manage = false
-
-[[rule]]
-app = "^Karabiner-Elements$"
-manage = false
-
-[[rule]]
-app = "^Mouseless$"
-manage = false
-
-[[rule]]
-app = "^Keycastr$"
-manage = false
-
-[[rule]]
-app = "^Books$"
-manage = false
-
-[[rule]]
-app = "^mpv$"
-manage = false
-
-[[rule]]
-app = "^licecap$"
-manage = false
-
-[[rule]]
-app = "^Raycast$"
-manage = false
-
-[[rule]]
-app = "^eqMac$"
-manage = false
-
-[[rule]]
-app = "^GitX$"
-manage = false
-
-[[rule]]
-app = "^MacYTDL$"
-manage = false
+# [[rule]]
+# app = "^System Preferences$"
+# manage = false
+#
+# [[rule]]
+# app = "^System Settings$"
+# manage = false
+#
+# [[rule]]
+# app = "^Calculator$"
+# manage = false
+#
+# [[rule]]
+# app = "^Karabiner-Elements$"
+# manage = false
+#
+# [[rule]]
+# app = "^Mouseless$"
+# manage = false
+#
+# [[rule]]
+# app = "^Keycastr$"
+# manage = false
+#
+# [[rule]]
+# app = "^Books$"
+# manage = false
+#
+# [[rule]]
+# app = "^mpv$"
+# manage = false
+#
+# [[rule]]
+# app = "^licecap$"
+# manage = false
+#
+# [[rule]]
+# app = "^Raycast$"
+# manage = false
+#
+# [[rule]]
+# app = "^eqMac$"
+# manage = false
+#
+# [[rule]]
+# app = "^GitX$"
+# manage = false
+#
+# [[rule]]
+# app = "^MacYTDL$"
+# manage = false
 
 # -----------------------------------------------------------------------------
 # Key bindings (AeroSpace-native; replaces skhd aerospace bindings)
