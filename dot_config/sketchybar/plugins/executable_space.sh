@@ -3,10 +3,10 @@
 source "$CONFIG_DIR/colors.sh"
 
 # Fail gracefully if dependencies are missing
-if ! command -v jq &>/dev/null || ! command -v yabai &>/dev/null; then
-  sketchybar --set "$NAME" label.drawing=off
-  exit 0
-fi
+# Commented out yabai dependency - will be re-enabled when aerospace is installed
+# if ! command -v jq &>/dev/null || ! command -v yabai &>/dev/null; then
+#   sketchybar --set "$NAME" label.drawing=off
+#   exit 0
 
 get_app_icon() {
   case "$1" in
@@ -66,7 +66,7 @@ sid="${NAME#*.}"
 
 # Determine if this space is selected using yabai as the source of truth
 # This avoids race conditions where sketchybar's $SELECTED variable is stale
-current_sid=$(yabai -m query --spaces --space | jq '.index')
+# current_sid=$(yabai -m query --spaces --space | jq '.index')  # yabai removed
 SELECTED_LOCAL="off"
 if [ "$sid" -eq "$current_sid" ]; then
   SELECTED_LOCAL="on"
@@ -74,7 +74,7 @@ fi
 
 # Query yabai for windows in the current space
 # Note: We need to filter out windows that don't have an app name (e.g. system windows)
-apps=$(yabai -m query --windows --space "$sid" | jq -r '.[].app' | sort -u)
+# apps=$(yabai -m query --windows --space "$sid" | jq -r '.[].app' | sort -u)  # yabai removed
 
 label=""
 if [ -n "$apps" ]; then
