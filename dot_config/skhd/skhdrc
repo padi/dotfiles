@@ -1,31 +1,6 @@
-# skhd hotkey daemon config — aerospace bindings
-
-### Within Current Workspace — Focus
-alt - j : aerospace focus down
-alt - k : aerospace focus up
-alt - h : aerospace focus left
-alt - l : aerospace focus right
-
-### Layout Changes
-alt - b : aerospace layout bsp          # Binary Space Partitioning (default)
-
-### Swap Windows
-shift + alt - j : aerospace swap down
-shift + alt - k : aerospace swap up
-shift + alt - h : aerospace swap left
-shift + alt - l : aerospace swap right
-
-### Move Window between Workspaces
-ctrl - 1 : aerospace workspace 1
-ctrl - 2 : aerospace workspace 2
-ctrl - 3 : aerospace workspace 3
-ctrl - 4 : aerospace workspace 4
-ctrl - 5 : aerospace workspace 5
-ctrl - 6 : aerospace workspace 6
-ctrl - 7 : aerospace workspace 7
-ctrl - 8 : aerospace workspace 8
-ctrl - 9 : aerospace workspace 9
+# skhd hotkey daemon config — only reload retained (aerospace now handles its own hotkeys)
 
 ### Restart skhd / reload sketchybar
-ctrl + alt - r : skhd --restart-service \
+ctrl + alt - r : aerospace reload-config \
+&& skhd --restart-service \
 && sketchybar --reload
