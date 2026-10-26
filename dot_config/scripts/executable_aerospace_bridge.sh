@@ -16,8 +16,8 @@ while true; do
   new_workspace=$(aerospace list-workspaces --focused 2>/dev/null)
   
   if [ "$new_workspace" != "$current_workspace" ]; then
-    # Workspace changed - trigger sketchybar to refresh
-    sketchybar --trigger aerospace_refresh >/dev/null 2>&1
+    # Workspace changed - force all scripts to re-run
+    sketchybar --update >/dev/null 2>&1
     current_workspace="$new_workspace"
   fi
 done
