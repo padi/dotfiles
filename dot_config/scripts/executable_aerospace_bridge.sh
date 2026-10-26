@@ -16,8 +16,10 @@ while true; do
   new_workspace=$(aerospace list-workspaces --focused 2>/dev/null)
   
   if [ "$new_workspace" != "$current_workspace" ]; then
-    # Workspace changed - force all scripts to re-run
-    sketchybar --update >/dev/null 2>&1
+    # Only update the two affected space items (old + new)
+    # Avoid running all 9 scripts by calling space.sh directly
+    NAME="space.$current_workspace" CONFIG_DIR=/Users/hawk/.config/sketchybar bash /Users/hawk/.config/sketchybar/plugins/space.sh >/dev/null 2>&1
+    NAME="space.$new_workspace" CONFIG_DIR=/Users/hawk/.config/sketchybar bash /Users/hawk/.config/sketchybar/plugins/space.sh >/dev/null 2>&1
     current_workspace="$new_workspace"
   fi
 done
