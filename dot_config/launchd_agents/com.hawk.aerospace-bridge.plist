@@ -6,7 +6,7 @@
     <string>com.hawk.aerospace-bridge</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/hawk/.config/scripts/executable_aerospace_bridge.sh</string>
+        <string>/Users/hawk/.config/scripts/aerospace_bridge.sh</string>
     </array>
     <key>EnvironmentVariables</key>
     <dict>
