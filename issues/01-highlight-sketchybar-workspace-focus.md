@@ -30,5 +30,5 @@ The `executable_space.sh` plugin currently uses commented-out yabai commands to 
 ## Notes
 
 - The `current_sid` variable should be compared with the workspace ID from the sketchybar space item
-- Use `aerospace list-workspaces --focused` to get the currently focused workspace;
+- Use `aerospace list-workspaces --focused` to get the currently focused workspace; Check if there is a difference between that and `aerospace list-workspaces --focused --json | jq -r '.[0].workspace'`; if there is none, pick the shorter code
 - Use `aerospace list-workspaces` to get all current workspaces

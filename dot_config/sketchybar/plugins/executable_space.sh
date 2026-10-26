@@ -6,6 +6,7 @@ source "$CONFIG_DIR/colors.sh"
 if ! command -v jq &>/dev/null || ! command -v aerospace &>/dev/null; then
   sketchybar --set "$NAME" label.drawing=off
   exit 0
+fi
 
 get_app_icon() {
   case "$1" in
@@ -67,16 +68,18 @@ sid="${NAME#*.}"
 # This avoids race conditions where sketchybar's $SELECTED variable is stale
 # Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
 # Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
-current_sid=$(aerospace list-workspaces --focused --json | jq -r '.[0].workspace')
+current_sid=$(aerospace list-workspaces --focused)
 SELECTED_LOCAL="off"
+FOCUSED_INDICATOR=""
 if [ "$sid" -eq "$current_sid" ]; then
   SELECTED_LOCAL="on"
+  FOCUSED_INDICATOR="●"
 fi
 
 # Query aerospace for windows in the current workspace
 # Note: Use --workspace "$sid" to query the specific workspace the plugin is rendering
 # Note: We need to filter out windows that don't have an app name (e.g. system windows)
-apps=$(aerospace list-windows --workspace "$sid" --json | jq -r '.[].app' | sort -u)
+apps=$(aerospace list-windows --workspace "$sid" --json | jq -r '.[].["app-name"]' | sort -u)
 
 label=""
 if [ -n "$apps" ]; then
@@ -88,6 +91,13 @@ fi
 
 # Trim trailing space
 label=$(echo "$label" | sed 's/ $//')
+
+# Append focused workspace indicator if this space is focused
+if [ -n "$label" ]; then
+  label="$label $FOCUSED_INDICATOR"
+else
+  label="$FOCUSED_INDICATOR"
+fi
 
 # The $SELECTED variable is available for space components and indicates if
 # the space invoking this script (with name: $NAME) is currently selected:
