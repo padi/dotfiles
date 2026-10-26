@@ -9,7 +9,7 @@ if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; th
 fi
 
 # Run aerospace subscribe and pipe each event to sketchybar trigger
-aerospace subscribe --all --no-send-initial | while IFS= read -r line; do
+aerospace subscribe --all | while IFS= read -r line; do
   # Trigger SketchyBar to re-run all subscribed item scripts
   sketchybar --trigger aerospace_refresh
 done
