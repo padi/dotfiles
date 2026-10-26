@@ -119,6 +119,13 @@ OS-gated: `darwin`-only alias `nobrew` (brew with `HOMEBREW_NO_AUTO_UPDATE=1`).
 - `executable_*` files are deployed with the executable bit set.
 - `.chezmoiexternal.toml` means `~/.config/lazyvim` is a separate git repo, not part of this one.
 
+### Testing conventions
+
+- Test files live in a top-level `tests/` directory (excluded from deployment via `/tests` in `.chezmoiignore`)
+- Tests mirror the source file path: e.g. `dot_config/scripts/executable_aerospace_bridge.sh` → `tests/dot_config/scripts/executable_aerospace_bridge_test.sh`
+- Shared helper scripts with no corresponding source file go in `tests/helpers/`
+- Naming: `<source_filename>_test.sh` (strip the `executable_` prefix to match source name)
+
 ### Editing conventions
 
 - Shell files use `#!/usr/bin/env bash` or `#!/bin/zsh` shebangs; sketchybar plugins use `#!/bin/sh` or `#!/bin/bash`.

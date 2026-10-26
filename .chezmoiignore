@@ -4,5 +4,8 @@
 .config/sketchybar
 .config/aerospace
 {{- end }}
+/tests
 AGENTS.md
 *.md
+install_aerospace.md
+uninstall_yabai.md
