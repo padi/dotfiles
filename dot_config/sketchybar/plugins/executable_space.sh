@@ -69,6 +69,7 @@ sid="${NAME#*.}"
 # Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
 # Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
 current_sid=$(aerospace list-workspaces --focused)
+echo "space.sh executed for sid $sid and current_sid $current_sid" >/tmp/space.log
 SELECTED_LOCAL="off"
 FOCUSED_INDICATOR=""
 if [ "$sid" -eq "$current_sid" ]; then
