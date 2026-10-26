@@ -1,7 +1,7 @@
 # Code Review — Two-Axis Tasks (main...HEAD)
 
 ## Standards Axis
-- [ ] **Fix typo in `dot_config/sketchybar/executable_font.sh`** (line 8): Remove stray `o` after `ICON_FONT="Hack Nerd Font:Bold:17.0"` — will silently break font rendering on `cirrus`.
+- [x] **Fix typo in `dot_config/sketchybar/executable_font.sh`** (line 8): Remove stray `o` after `ICON_FONT="Hack Nerd Font:Bold:17.0"` — will silently break font rendering on `cirrus`.
 - [ ] **Remove unused `aerospace_refresh` trigger subscription** from `dot_config/sketchybar/executable_sketchybarrc` — dead subscription introduced when bridge switched to direct `space.sh` calls.
 - [ ] **Clean up debug logging** from `dot_config/sketchybar/plugins/executable_space.sh` — `echo "space.sh executed..." >/tmp/space.log` is unnecessary runtime logging.
 - [ ] **Review `.chezmoiignore` redundancy**: `*.md` was too broad; replaced with explicit `issues/`, root-level `.md` files, and `AGENTS.md`. Keep both ignores in sync.
