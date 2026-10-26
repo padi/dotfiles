@@ -8,8 +8,8 @@ if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; th
   exit 0
 fi
 
-# Run aerospace subscribe and pipe each event to sketchybar trigger
-aerospace subscribe --all | while IFS= read -r line; do
+# Run aerospace subscribe in a script with pseudo-TTY to ensure it works
+/usr/bin/script -q -c "aerospace subscribe --all" /tmp/aerospace_events.log 2>&1 | while IFS= read -r line; do
   # Trigger SketchyBar to re-run all subscribed item scripts
   sketchybar --trigger aerospace_refresh
 done
