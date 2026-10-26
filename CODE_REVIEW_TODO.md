@@ -7,9 +7,9 @@
 - [x] **Review `.chezmoiignore` redundancy**: `*.md` was too broad; replaced with explicit `issues/`, root-level `.md` files, and `AGENTS.md`. Keep both ignores in sync.
 
 ## Spec Axis
-- [ ] **Remove orphan `default-config.toml`** from `~/.config/aerospace/` — not managed by chezmoi, left over from before yabai→aerospace migration. Per issue 02 acceptance: "`default-config.toml` is removed (or ignored) from the workspace."
-- [ ] **Verify `.chezmoiignore` doesn't suppress AGENTS.md deployment** — currently excluded via explicit listing; ensure this is intentional since AGENTS.md is the coding-standards reference.
-- [ ] **Confirm issues folder is tracked in git but excluded from chezmoi deployment** — `.chezmoiignore` has `issues/`, `.gitignore` now also has `issues/` (newly added). Verify both are consistent.
+- [x] **Remove orphan `default-config.toml`** from `~/.config/aerospace/` — not managed by chezmoi, left over from before yabai→aerospace migration. Per issue 02 acceptance: "`default-config.toml` is removed (or ignored) from the workspace."
+- [x] **Verify `.chezmoiignore` doesn't suppress AGENTS.md deployment** — currently excluded via explicit listing; ensure this is intentional since AGENTS.md is the coding-standards reference.
+- [x] **Confirm issues folder is tracked in git but excluded from chezmoi deployment** — `.chezmoiignore` has `issues/`, `.gitignore` now also has `issues/` (newly added). Verify both are consistent.
 
 ## Completed
 - [x] Updated `.chezmoiignore` to explicitly exclude markdown files (issues/, root-level .md, AGENTS.md) from chezmoi deployment
