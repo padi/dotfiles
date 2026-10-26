@@ -1,15 +1,23 @@
 #!/bin/bash
-# Bridge: aerospace subscribe -> sketchybar --trigger aerospace_refresh
-# This listens for AeroSpace events (workspace change, window move, focus change)
-# and triggers SketchyBar to refresh space items.
+# Bridge: poll aerospace for workspace changes and trigger sketchybar updates
+# This approach uses polling since aerospace subscribe has issues with piped output.
 
 # Fail gracefully if dependencies are missing
 if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; then
   exit 0
 fi
 
-# Run aerospace subscribe and pipe each event to sketchybar trigger
-aerospace subscribe --all | while IFS= read -r line; do
-  # Trigger SketchyBar to re-run all subscribed item scripts
-  sketchybar --trigger aerospace_refresh
+# Track the current focused workspace
+current_workspace=$(aerospace list-workspaces --focused)
+
+# Poll every 500ms for changes
+while true; do
+  sleep 0.5
+  new_workspace=$(aerospace list-workspaces --focused 2>/dev/null)
+  
+  if [ "$new_workspace" != "$current_workspace" ]; then
+    # Workspace changed - trigger sketchybar to refresh
+    sketchybar --trigger aerospace_refresh >/dev/null 2>&1
+    current_workspace="$new_workspace"
+  fi
 done
