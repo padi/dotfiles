@@ -23,3 +23,6 @@ PLAN_*.md
 
 # ctags file
 tags
+
+# temporary files
+tmp/
