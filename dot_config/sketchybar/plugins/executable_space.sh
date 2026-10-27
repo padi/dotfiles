@@ -64,20 +64,6 @@ get_app_icon() {
 # Get the space ID from the name (e.g., space.1 -> 1)
 sid="${NAME#*.}"
 
-# Determine if this space is selected using aerospace as the source of truth
-# This avoids race conditions where sketchybar's $SELECTED variable is stale
-# Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
-# Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
-# For reference of original $SELECTED usage, See:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-current_sid=$(aerospace list-workspaces --focused)
-SELECTED_LOCAL="off"
-FOCUSED_INDICATOR=""
-if [ "$sid" -eq "$current_sid" ]; then
-  SELECTED_LOCAL="on"
-  FOCUSED_INDICATOR="●"
-fi
-
 # Query aerospace for windows in the current workspace
 # Note: Use --workspace "$sid" to query the specific workspace the plugin is rendering
 # Note: We need to filter out windows that don't have an app name (e.g. system windows)
@@ -91,18 +77,33 @@ if [ -n "$apps" ]; then
   done <<<"$apps"
 fi
 
+# Determine if this space is selected using aerospace as the source of truth
+# This avoids race conditions where sketchybar's $SELECTED variable is stale
+# Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
+# Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
+# For reference of original $SELECTED usage, See:
+# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
+current_sid=$(aerospace list-workspaces --focused)
+SELECTED_LOCAL="off"
+FOCUSED_INDICATOR="○"
+if [ "$sid" -eq "$current_sid" ]; then
+  SELECTED_LOCAL="on"
+  FOCUSED_INDICATOR="●"
+fi
+
 # Trim trailing space
 label=$(echo "$label" | sed 's/ $//')
 
 # Append focused workspace indicator if this space is focused
-if [ -n "$label" ]; then
-  label="$label $FOCUSED_INDICATOR"
-else
-  label="$FOCUSED_INDICATOR"
-fi
+# if [ -n "$label" ]; then
+#   label="$label $FOCUSED_INDICATOR"
+# else
+#   label="$FOCUSED_INDICATOR"
+# fi
 
 sketchybar --set "$NAME" \
   icon.highlight="$SELECTED_LOCAL" \
+  icon.padding_left=8 \
   background.drawing="$SELECTED_LOCAL" \
   label="$label" \
   label.padding_left=4 \
