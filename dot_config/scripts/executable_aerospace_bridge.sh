@@ -19,6 +19,8 @@ mkdir -p "$(dirname "$LOCK_FILE")" 2>/dev/null
 
 # Function to clean up and exit
 cleanup_and_exit() {
+  pkill -f "aerospace subscribe.*focus-changed.*focused-workspace-changed.*window-detected" 2>/dev/null
+  pkill -f "aerospace_workspace_debounce" 2>/dev/null
   rm -f "$LOCK_FILE"
   exit "$1"
 }
@@ -90,6 +92,18 @@ echo $$ > "$LOCK_FILE"
 if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; then
   cleanup_and_exit 0
 fi
+
+# -----------------------------------------------------------------------------
+# Clean up any leftover background processes from previous bridge instances.
+# This prevents accumulation of orphaned `aerospace subscribe` processes that
+# can cause CPU spikes when launchd restarts the bridge (SIGKILL can't be
+# trapped, so the EXIT trap doesn't run on kill).
+# -----------------------------------------------------------------------------
+# Kill any existing aerospace subscribe processes (leftover from previous runs)
+pkill -f "aerospace subscribe.*focus-changed.*focused-workspace-changed.*window-detected" 2>/dev/null
+sleep 0.1
+# Also kill any leftover workspace debounce sleepers
+pkill -f "aerospace_workspace_debounce" 2>/dev/null
 
 SPACE_SH="$HOME/.config/sketchybar/plugins/space.sh"
 CONFIG_DIR="$HOME/.config/sketchybar"
@@ -165,7 +179,14 @@ event_listener &
 EVENT_PID=$!
 
 # Cleanup: kill the event listener and remove lock file if main loop exits
-trap 'kill "$EVENT_PID" 2>/dev/null; rm -f "$LOCK_FILE"' EXIT
+# Also kill any leftover aerospace subscribe processes as a safety net
+cleanup_bg_processes() {
+  kill "$EVENT_PID" 2>/dev/null
+  pkill -f "aerospace subscribe.*focus-changed.*focused-workspace-changed.*window-detected" 2>/dev/null
+  pkill -f "aerospace_workspace_debounce" 2>/dev/null
+  rm -f "$LOCK_FILE"
+}
+trap 'cleanup_bg_processes' EXIT
 
 # ---------------------------------------------------------------------------
 # Safety poll (runs every 3s to catch window moves + closes)

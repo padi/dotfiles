@@ -12,7 +12,12 @@ config-version = 2
 # -----------------------------------------------------------------------------
 # Notify Sketchybar about workspace change — enables immediate update
 # without needing the polling safety net for workspace switches.
-exec-on-workspace-change = ["/bin/bash", "-c", "sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE"]
+#
+# DEBOUNCED: Instead of spawning sketchybar on EVERY workspace change (which
+# causes CPU spikes when rapidly switching), we use a debounced script that
+# delays 150ms and only triggers if the workspace hasn't changed during that
+# period. This prevents CPU spikes from rapid workspace switching.
+exec-on-workspace-change = ["/bin/bash", "/Users/hawk/.config/aerospace/workspace_debounce.sh", "$AEROSPACE_FOCUSED_WORKSPACE"]
 
 # -----------------------------------------------------------------------------
 # Default layout
