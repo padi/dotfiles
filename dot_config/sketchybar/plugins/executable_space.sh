@@ -68,6 +68,8 @@ sid="${NAME#*.}"
 # This avoids race conditions where sketchybar's $SELECTED variable is stale
 # Note: AeroSpace uses "workspaces" (like virtual desktops), not native macOS Spaces.
 # Each sketchybar space item (e.g., "space.1") maps to an AeroSpace workspace ID.
+# For reference of original $SELECTED usage, See:
+# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 current_sid=$(aerospace list-workspaces --focused)
 SELECTED_LOCAL="off"
 FOCUSED_INDICATOR=""
@@ -99,9 +101,6 @@ else
   label="$FOCUSED_INDICATOR"
 fi
 
-# The $SELECTED variable is available for space components and indicates if
-# the space invoking this script (with name: $NAME) is currently selected:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
 sketchybar --set "$NAME" \
   icon.highlight="$SELECTED_LOCAL" \
   background.drawing="$SELECTED_LOCAL" \
