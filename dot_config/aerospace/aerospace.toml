@@ -1,0 +1,135 @@
+# ~/.config/aerospace/aerospace.toml
+# AeroSpace configuration (managed by chezmoi)
+# See: https://github.com/nikitabobko/AeroSpace
+
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
+# -----------------------------------------------------------------------------
+# Default layout
+# -----------------------------------------------------------------------------
+default-root-container-layout = 'tiles'
+
+# -----------------------------------------------------------------------------
+# Padding / gaps
+# -----------------------------------------------------------------------------
+# Window gap (equivalent to yabai's window_gap)
+
+# Sketchybar height: the bar is 24px high at the top (per sketchybarrc).
+# AeroSpace does not have an explicit `external_bar` like yabai, but windows
+# will naturally avoid the area covered by sketchybar since it sits on top of
+# the display. The gap above defaults to 2px; if you need more space or want
+# to reserve the exact 24px for the bar, you can increase it:
+# gap = 24 # uncomment to reserve top area for sketchybar
+gaps.outer.top = 25
+
+# TODO: Remove me or reimplement in aeropsace
+# -----------------------------------------------------------------------------
+# Window rules (manage = false for apps that should float)
+# -----------------------------------------------------------------------------
+# [[rule]]
+# app = "^System Preferences$"
+# manage = false
+#
+# [[rule]]
+# app = "^System Settings$"
+# manage = false
+#
+# [[rule]]
+# app = "^Calculator$"
+# manage = false
+#
+# [[rule]]
+# app = "^Karabiner-Elements$"
+# manage = false
+#
+# [[rule]]
+# app = "^Mouseless$"
+# manage = false
+#
+# [[rule]]
+# app = "^Keycastr$"
+# manage = false
+#
+# [[rule]]
+# app = "^Books$"
+# manage = false
+#
+# [[rule]]
+# app = "^mpv$"
+# manage = false
+#
+# [[rule]]
+# app = "^licecap$"
+# manage = false
+#
+# [[rule]]
+# app = "^Raycast$"
+# manage = false
+#
+# [[rule]]
+# app = "^eqMac$"
+# manage = false
+#
+# [[rule]]
+# app = "^GitX$"
+# manage = false
+#
+# [[rule]]
+# app = "^MacYTDL$"
+# manage = false
+
+# -----------------------------------------------------------------------------
+# Key bindings (AeroSpace-native; replaces skhd aerospace bindings)
+# -----------------------------------------------------------------------------
+# All possible keys:
+#   modifiers: cmd, alt, ctrl, shift (joined with '-');
+#              letters, numbers, F-keys, special keys, arrows.
+# All possible commands: https://nikitabobko.github.io/AeroSpace/commands
+# Note: 'bsp' is not a recognized layout via CLI; 'tiles' is the default
+# (binary space partitioning) layout. See AeroSpace guide #layouts.
+[mode.main.binding]
+# Focus within current workspace
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Layout
+alt-b = 'layout tiles'
+
+# Swap windows
+alt-shift-h = 'swap left'
+alt-shift-j = 'swap down'
+alt-shift-k = 'swap up'
+alt-shift-l = 'swap right'
+
+# Workspace switching (ctrl + number, per current setup)
+ctrl-1 = 'workspace 1'
+ctrl-2 = 'workspace 2'
+ctrl-3 = 'workspace 3'
+ctrl-4 = 'workspace 4'
+ctrl-5 = 'workspace 5'
+ctrl-6 = 'workspace 6'
+ctrl-7 = 'workspace 7'
+ctrl-8 = 'workspace 8'
+ctrl-9 = 'workspace 9'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-n = 'move-node-to-workspace next'
+alt-shift-p = 'move-node-to-workspace prev'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#layout
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
