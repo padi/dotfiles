@@ -7,4 +7,4 @@ ctrl + alt - r : aerospace reload-config \
 && aerospace_bridge.sh --restart
 
 ### Reload this config only
-ctrl + alt - shift - r : skhd --reload
+ctrl + alt + shift - r : skhd --reload
