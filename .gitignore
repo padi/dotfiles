@@ -1,5 +1,2 @@
 # Ignore issue markdown files and root-level docs from git tracking
 issues/
-PLAN_refresh_space_items_on_move.md
-install_aerospace.md
-uninstall_yabai.md

@@ -15,9 +15,8 @@ AGENTS.md
 issues/
 
 # Root-level markdown files (PLAN, install, uninstall docs)
-PLAN_refresh_space_items_on_move.md
-install_aerospace.md
-uninstall_yabai.md
+PLAN_*.md
+*TODO*.md
 
 # Local dotfile repo metadata — never deploy (housekeeping only)
 .gitignore
