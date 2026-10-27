@@ -19,3 +19,6 @@ PLAN_*.md
 
 # Local dotfile repo metadata — never deploy (housekeeping only)
 .gitignore
+
+# ctags file
+tags
