@@ -1,6 +1,10 @@
 # skhd hotkey daemon config — only reload retained (aerospace now handles its own hotkeys)
 
-### Restart skhd / reload sketchybar
+### Restart skhd / reload sketchybar / restart aerospace bridge
 ctrl + alt - r : aerospace reload-config \
 && skhd --restart-service \
-&& sketchybar --reload
+&& sketchybar --reload \
+&& aerospace_bridge.sh --restart
+
+### Reload this config only
+ctrl + alt - shift - r : skhd --reload

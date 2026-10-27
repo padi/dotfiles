@@ -3,6 +3,15 @@
 # Detects both focused-workspace changes and move-node-to-workspace (window moves).
 # Uses polling at 2-second intervals to catch all changes reliably.
 
+# Handle --restart flag
+if [[ "$1" == "--restart" ]]; then
+  pkill -f "aerospace_bridge.sh" 2>/dev/null
+  sleep 1
+  nohup "$0" &
+  echo "Aerospace bridge restarted (PID: $(pgrep -f aerospace_bridge.sh))"
+  exit 0
+fi
+
 # Fail gracefully if dependencies are missing
 if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; then
   exit 0
