@@ -35,18 +35,56 @@ if [ -f "$LOCK_FILE" ]; then
   fi
 fi
 
+# -----------------------------------------------------------------------------
+# Argument parsing (management options bypass lock check)
+# -----------------------------------------------------------------------------
+case "$1" in
+  --help)
+    cat <<EOF
+Usage: $(basename "$0") [OPTION]
+
+Options:
+  --help     Show this help message
+  --stop     Stop the aerospace bridge
+  --restart  Restart the aerospace bridge
+
+Without an option, starts the aerospace bridge (event-driven + 3s safety poll).
+EOF
+    cleanup_and_exit 0
+    ;;
+  --stop)
+    pkill -f "aerospace_bridge.sh" 2>/dev/null
+    rm -f "$LOCK_FILE" 2>/dev/null
+    echo "Aerospace bridge stopped"
+    cleanup_and_exit 0
+    ;;
+  --restart)
+    pkill -f "aerospace_bridge.sh" 2>/dev/null
+    sleep 0.3
+    rm -f "$LOCK_FILE" 2>/dev/null
+    nohup "$0" &
+    echo "Aerospace bridge restarted (PID: $(pgrep -f aerospace_bridge.sh | head -1))"
+    cleanup_and_exit 0
+    ;;
+  -*)
+    echo "Error: Unknown option '$1'" >&2
+    echo >&2
+    cat <<EOF >&2
+Usage: $(basename "$0") [OPTION]
+
+Options:
+  --help     Show this help message
+  --stop     Stop the aerospace bridge
+  --restart  Restart the aerospace bridge
+
+Without an option, starts the aerospace bridge (event-driven + 3s safety poll).
+EOF
+    cleanup_and_exit 1
+    ;;
+esac
+
 # Write our PID to the lock file
 echo $$ > "$LOCK_FILE"
-
-# Handle --restart flag
-if [[ "$1" == "--restart" ]]; then
-  pkill -f "aerospace_bridge.sh" 2>/dev/null
-  sleep 0.3
-  rm -f "$LOCK_FILE" 2>/dev/null
-  nohup "$0" &
-  echo "Aerospace bridge restarted (PID: $(pgrep -f aerospace_bridge.sh | head -1))"
-  cleanup_and_exit 0
-fi
 
 # Fail gracefully if dependencies are missing
 if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; then
