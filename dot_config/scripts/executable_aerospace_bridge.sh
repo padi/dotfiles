@@ -11,18 +11,46 @@
 # AeroSpace provides no "window-moved-between-workspaces" event, so the
 # safety poll is required for correctness of window-move detection.
 
+# -----------------------------------------------------------------------------
+# Prevent multiple instances (lock file guard)
+# -----------------------------------------------------------------------------
+LOCK_FILE="$HOME/.cache/aerospace_bridge.pid"
+mkdir -p "$(dirname "$LOCK_FILE")" 2>/dev/null
+
+# Function to clean up and exit
+cleanup_and_exit() {
+  rm -f "$LOCK_FILE"
+  exit "$1"
+}
+
+# Check if already running
+if [ -f "$LOCK_FILE" ]; then
+  old_pid=$(cat "$LOCK_FILE" 2>/dev/null)
+  if [ -n "$old_pid" ] && kill -0 "$old_pid" 2>/dev/null; then
+    # Process exists, exit silently
+    exit 0
+  else
+    # Stale lock file, remove it
+    rm -f "$LOCK_FILE"
+  fi
+fi
+
+# Write our PID to the lock file
+echo $$ > "$LOCK_FILE"
+
 # Handle --restart flag
 if [[ "$1" == "--restart" ]]; then
   pkill -f "aerospace_bridge.sh" 2>/dev/null
   sleep 0.3
+  rm -f "$LOCK_FILE" 2>/dev/null
   nohup "$0" &
-  echo "Aerospace bridge restarted (PID: $(pgrep -f aerospace_bridge.sh))"
-  exit 0
+  echo "Aerospace bridge restarted (PID: $(pgrep -f aerospace_bridge.sh | head -1))"
+  cleanup_and_exit 0
 fi
 
 # Fail gracefully if dependencies are missing
 if ! command -v aerospace &>/dev/null || ! command -v sketchybar &>/dev/null; then
-  exit 0
+  cleanup_and_exit 0
 fi
 
 SPACE_SH="$HOME/.config/sketchybar/plugins/space.sh"
@@ -98,8 +126,8 @@ event_listener() {
 event_listener &
 EVENT_PID=$!
 
-# Cleanup: kill the event listener if the main loop exits
-trap 'kill "$EVENT_PID" 2>/dev/null' EXIT
+# Cleanup: kill the event listener and remove lock file if main loop exits
+trap 'kill "$EVENT_PID" 2>/dev/null; rm -f "$LOCK_FILE"' EXIT
 
 # ---------------------------------------------------------------------------
 # Safety poll (runs every 3s to catch window moves + closes)
