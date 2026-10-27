@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Cycle workspaces 1-9 with Ctrl+Left/Right
+# Wraps around at bounds (1→9 going left, 9→1 going right)
+
+# Fail gracefully if aerospace is missing
+if ! command -v aerospace &>/dev/null; then
+  exit 1
+fi
+
+# Determine direction: left = -1, right = +1
+# This script is called with argument: prev (left) or next (right)
+direction="${1:-next}"
+
+# Get current focused workspace number
+current_ws=$(aerospace list-workspaces --focused 2>/dev/null | grep -oE '[0-9]+' | head -1)
+
+if [ -z "$current_ws" ]; then
+  exit 1
+fi
+
+# Calculate new workspace
+if [ "$direction" = "prev" ]; then
+  # Go left (decrement), wrap 1→9
+  new_ws=$((current_ws - 1))
+  if [ "$new_ws" -lt 1 ]; then
+    new_ws=9
+  fi
+else
+  # Go right (increment), wrap 9→1
+  new_ws=$((current_ws + 1))
+  if [ "$new_ws" -gt 9 ]; then
+    new_ws=1
+  fi
+fi
+
+# Switch to the new workspace
+aerospace workspace "$new_ws" 2>/dev/null

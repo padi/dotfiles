@@ -8,3 +8,6 @@ ctrl + alt - r : aerospace reload-config \
 
 ### Reload this config only
 ctrl + alt + shift - r : skhd --reload
+
+ctrl - left : ~/.config/scripts/cycle_workspace prev
+ctrl - right : ~/.config/scripts/cycle_workspace next
