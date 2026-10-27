@@ -8,6 +8,13 @@
 config-version = 2
 
 # -----------------------------------------------------------------------------
+# Event hooks / callbacks
+# -----------------------------------------------------------------------------
+# Notify Sketchybar about workspace change — enables immediate update
+# without needing the polling safety net for workspace switches.
+exec-on-workspace-change = ["/bin/bash", "-c", "sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE"]
+
+# -----------------------------------------------------------------------------
 # Default layout
 # -----------------------------------------------------------------------------
 default-root-container-layout = 'tiles'
