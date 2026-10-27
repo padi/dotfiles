@@ -9,18 +9,23 @@
 # export BAR_COLOR=0x40000000
 # export ITEM_BG_COLOR=0x40ffffff # grey
 
+export FOCUSED_WORKSPACE_ITEM_COLOR=0xffffa05a # cheesy orange
+
 # Cheesy Orange
 # export ITEM_BG_COLOR=0xffffa05a #cheesy orange
 # First 2 hex chars is for opacity i.e.
 # e6 ~ 90% opacity
+# bf ~ 75% opacity
 # 40 ~ 25% opacity
 # 1a ~ 10% opacity
 
 # vacous2 by hal
 export WHITE=0xfffff0f0
-export BAR_COLOR=0x1a101010     # black
-export ITEM_BG_COLOR=0xff606060 # vacuous2 lighter grey
+export BAR_COLOR=0x40101010     # black
+# export ITEM_BG_COLOR=0xff606060 # vacuous2 lighter grey
 export ACCENT_COLOR=0xfff9bb80 # vacuous2 orange
+# for debugging purposes
+export DEBUG_COLOR=0xff003547
 
 # Peach over Orange / Orange over Peach
 # export ITEM_BG_COLOR=0xf9bb8000 # orange
