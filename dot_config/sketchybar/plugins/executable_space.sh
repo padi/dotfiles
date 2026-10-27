@@ -38,6 +38,7 @@ get_app_icon() {
   "Numbers") echo "" ;;
   "Obsidian") echo "󰇈" ;;
   "Pages") echo "󱓧" ;;
+  "Paseo") echo "" ;;
   "Postman") echo "" ;;
   "Preview") echo "󰋩" ;;
   "Reminders") echo "󰉹" ;;
