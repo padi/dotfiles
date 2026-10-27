@@ -3,3 +3,19 @@
 .config/yabai
 .config/sketchybar
 {{- end }}
+
+# Tests directory — never deploy tests
+/tests
+
+# Coding standards doc — keep local only, do not deploy
+AGENTS.md
+
+# All issue markdown files — keep local only, do not deploy
+issues/
+
+# Root-level markdown files (PLAN, install, uninstall docs)
+PLAN_*.md
+*TODO*.md
+
+# Local dotfile repo metadata — never deploy (housekeeping only)
+.gitignore

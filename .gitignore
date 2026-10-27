@@ -1,0 +1,2 @@
+# Ignore issue markdown files and root-level docs from git tracking
+issues/
