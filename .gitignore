@@ -2,3 +2,8 @@
 issues/
 # ctags file
 tags
+
+nohup.out
+
+# temporary files
+tmp/
