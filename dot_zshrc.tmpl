@@ -302,6 +302,7 @@ alias chrome='open -a "Google Chrome"'
 # Opens a new window, not new tab
 alias chroment='open -na "Google Chrome"'
 # Open in incognito mode
+# 
 alias chromei='open -a "Google Chrome" --args --incognito'
 
 # set defaultbrowser via command line in macos
@@ -373,7 +374,12 @@ export PATH="/Users/hawk/.antigravity-ide/antigravity-ide/bin:$PATH"
 export PATH="$HOME/.devrelay/bin:$PATH"
 
 # Added by backboard.io
-export PATH="/Users/hawk/.backboard/bin:$PATH"
+export PATH="$PATH:$HOME/.backboard/bin"
 
 # Add emacs
-export PATH="~/.config/emacs/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+# doom emacs, open in terminal instead of being an app
+alias dmacs='emacs -nw'
+
+# kimi-code
+export PATH="$HOME/.kimi-code/bin:$PATH"
