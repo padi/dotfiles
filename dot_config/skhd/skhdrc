@@ -4,3 +4,16 @@
 # Reset skhd, sketchybar
 ctrl + alt - r : && skhd --restart-service \
 && sketchybar --reload
+
+#################################
+# KEY REMAPS (HID layer, skhd.zig)
+#################################
+# right ctrl -> right command
+# Why: my external keyboard has a right ctrl but no right cmd key.
+.device usb_receiver { vendor: 0x046d, product: 0xc534 }
+.device apple_internal_keyboard_trackpad { vendor: 0x05ac, product: 0x0291 }
+.device wireless_2_4g { vendor: 0x3554, product: 0xfa09 }
+
+.remap rctrl [device usb_receiver] : rcmd
+.remap rctrl [device apple_internal_keyboard_trackpad] : rcmd
+.remap rctrl [device wireless_2_4g] : rcmd

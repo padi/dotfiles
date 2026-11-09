@@ -30,7 +30,7 @@ This is a personal dotfile repository for macOS, managed by [chezmoi](https://ww
     │       ├── executable_space.sh      # per-space app icons via yabai/jq
     │       └── executable_volume.sh     # volume % + icon
     ├── skhd/
-    │   └── skhdrc                       # hotkey daemon bindings (alt/ctrl/shift)
+    │   └── skhdrc                       # skhd.zig bindings + HID remap (rctrl -> rcmd)
     ├── wezterm/
     │   ├── wezterm.lua                  # terminal config (DepartureMono Nerd Font)
     │   └── toggle_color_scheme.lua      # leader-triggered dark/light toggle
@@ -74,7 +74,8 @@ OS-gated: `darwin`-only alias `nobrew` (brew with `HOMEBREW_NO_AUTO_UPDATE=1`).
 **Window management (macOS, `cirrus` only)**
 
 - yabai (bsp layout, 2px padding/gap, external_bar for sketchybar)
-- skhd (alt/ctrl/shift hotkeys: HJKL focus/swap/warp, grid snapping, space focus/move)
+- skhd.zig >= 0.2.3 (installed as brew cask `jackielii/tap/skhd-zig`, not the old formula; `.remap` needs it plus the root `skhd-grabber`, set up via `skhd --start-service`)
+- skhd remap: `rctrl` -> `rcmd` via `.remap` rules, guarded per `.device` (vendor/product IDs from `skhd --list-devices`); reason: the external keyboard has a right ctrl but no right cmd key
 - yabai rules: unmanaged apps (System Settings, Calculator, Raycast, mpv, etc.)
 
 **Status bar**
