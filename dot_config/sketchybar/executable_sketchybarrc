@@ -71,8 +71,14 @@ for i in "${!SPACE_ICONS[@]}"; do
     click_script="osascript -e 'tell application \"System Events\" to key code ${SPACE_KEYCODES[i]} using control down'"
   )
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}" \
-    --subscribe space."$sid" space_change space_windows_change
+    --subscribe space."$sid" space_change
 done
+
+# One hidden observer updates every space's app icons; sketchybar doesn't
+# reliably deliver space_windows_change to the affected space item itself.
+sketchybar --add item space_windows left \
+  --set space_windows drawing=off script="$PLUGIN_DIR/space.sh" \
+  --subscribe space_windows space_windows_change
 
 ##### Adding Left Items #####
 # We add some regular items to the left side of the bar, where

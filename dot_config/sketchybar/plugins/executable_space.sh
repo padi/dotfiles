@@ -68,13 +68,14 @@ sid="${NAME#*.}"
 # Last known labels, restored on reload/login (nothing can list every
 # space's windows on demand without yabai)
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sketchybar/spaces"
-CACHE_FILE="$CACHE_DIR/$sid"
 
 case "$SENDER" in
 space_windows_change)
-  # sketchybar's native event; $INFO = {"space": N, "apps": {"App": count, ...}}
-  # It fires once per affected space, so ignore events for other spaces.
-  [ "$(echo "$INFO" | jq -r '.space')" = "$sid" ] || exit 0
+  # Only the hidden "space_windows" observer item subscribes to this:
+  # sketchybar doesn't reliably deliver it to the target space item itself.
+  # $INFO = {"space": N, "apps": {"App": count, ...}}
+  target="$(echo "$INFO" | jq -r '.space')"
+  [ -n "$target" ] && [ "$target" != "null" ] || exit 0
 
   label=""
   while read -r app; do
@@ -82,9 +83,9 @@ space_windows_change)
   done < <(echo "$INFO" | jq -r '.apps | keys[]')
   label="${label% }"
 
-  mkdir -p "$CACHE_DIR" && printf '%s' "$label" >"$CACHE_FILE"
+  mkdir -p "$CACHE_DIR" && printf '%s' "$label" >"$CACHE_DIR/$target"
 
-  sketchybar --set "$NAME" \
+  sketchybar --set "space.$target" \
     label="$label" \
     label.padding_left=4 \
     label.padding_right=8 \
@@ -92,7 +93,8 @@ space_windows_change)
   ;;
 forced)
   # Startup/reload: restore the cached label, then set the highlight
-  [ -f "$CACHE_FILE" ] && label="$(cat "$CACHE_FILE")" || label=""
+  [ "$NAME" = "space_windows" ] && exit 0
+  [ -f "$CACHE_DIR/$sid" ] && label="$(cat "$CACHE_DIR/$sid")" || label=""
   sketchybar --set "$NAME" \
     label="$label" \
     label.padding_left=4 \
@@ -102,7 +104,7 @@ forced)
     background.drawing="$SELECTED"
   ;;
 *)
-  # space_change / forced / etc: $SELECTED is provided by sketchybar for space items
+  # space_change etc: $SELECTED is provided by sketchybar for space items
   sketchybar --set "$NAME" \
     icon.highlight="$SELECTED" \
     background.drawing="$SELECTED"
