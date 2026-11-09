@@ -1,6 +1,6 @@
 {{- if ne .chezmoi.hostname "cirrus" }}
 .config/skhd
-.config/yabai
+.amethyst.yml
 .config/sketchybar
 {{- end }}
 

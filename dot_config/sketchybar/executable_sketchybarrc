@@ -6,10 +6,9 @@
 source "$CONFIG_DIR/font.sh"
 source "$CONFIG_DIR/colors.sh"
 PLUGIN_DIR="$CONFIG_DIR/plugins"
-# sketchybar has a different $path and can't find yabai installed via nix
-# YABAI="/Users/hawk/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/yabai"
-# Use this if installed via `brew install asmvik/formulae/yabai`
-YABAI="yabai"
+# Mission Control "Switch to Desktop N" key codes (ctrl+1..9).
+# Requires the shortcuts enabled in System Settings > Keyboard > Shortcuts > Mission Control.
+SPACE_KEYCODES=(18 19 20 21 23 22 26 28 25)
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
@@ -69,11 +68,10 @@ for i in "${!SPACE_ICONS[@]}"; do
     # debug with this in seperate terminal:
     # log stream | grep logger
     # log stream --predicate 'eventMessage contains "Sketchybar"'
-    # click_script="logger \"SketchyBar Path: $PATH\" && $YABAI -m space --focus $sid"
-    click_script="$YABAI -m space --focus $sid"
+    click_script="osascript -e 'tell application \"System Events\" to key code ${SPACE_KEYCODES[i]} using control down'"
   )
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}" \
-    --subscribe space."$sid" space_change front_app_switched space_windows_change
+    --subscribe space."$sid" space_change space_windows_change
 done
 
 ##### Adding Left Items #####
