@@ -138,6 +138,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # 1. Replace zsh's default completion selection menu with fzf!
 zinit light Aloxaf/fzf-tab
 # 2. pnpm aliases inspired by oh-my-zsh plugins https://github.com/ntnyq/omz-plugin-pnpm
+zstyle ':omz:plugins:pnpm' global-path false # plugin would export PNPM_HOME; PATH is set below
 zinit light ntnyq/omz-plugin-pnpm
 unalias pi # get all pnpm shortcuts except this
 
