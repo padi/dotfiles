@@ -10,6 +10,10 @@ mod2:
   - shift
   - control
 
+relaunch-amethyst:
+  mod: mod2
+  key: z
+
 layouts:
   - tall
   - wide
@@ -44,3 +48,7 @@ floating:
   - com.bitgapp.eqmac
   - net.phere.GitX
   - com.apple.script.id.MacYTDL
+
+# Additional mouse conveniences adjusting window layout
+mouse-swaps-windows: true
+mouse-resizes-windows: truek
