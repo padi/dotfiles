@@ -1,0 +1,54 @@
+# Amethyst config (https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md)
+# Settings here override Amethyst's preferences UI. Keyboard shortcuts are
+# intentionally NOT set here; they stay in the preferences UI.
+
+mod1:
+  - option
+  - shift
+mod2:
+  - option
+  - shift
+  - control
+
+relaunch-amethyst:
+  mod: mod2
+  key: z
+
+layouts:
+  - tall
+  - wide
+  - fullscreen
+  - column
+  - bsp
+
+# 2px gaps (ported from yabai's padding/window_gap)
+window-margins: true
+window-margin-size: 2
+screen-padding-left: 2
+screen-padding-right: 2
+screen-padding-bottom: 2
+# leave room for sketchybar (24pt bar)
+screen-padding-top: 25
+
+# Moving a window to a space follows it there
+follow-space-thrown-windows: true
+
+# Apps that are never tiled (ported from yabai `manage=off` rules)
+floating-is-blacklist: true
+floating:
+  - com.apple.systempreferences
+  - com.apple.calculator
+  - org.pqrs.Karabiner-Elements.Settings # not installed; kept from yabai rules
+  - net.sonuscape.mouseless
+  - io.github.keycastr
+  - com.apple.iBooksX
+  - io.mpv # not installed; kept from yabai rules
+  - com.cockos.LICEcap
+  - com.raycast.macos
+  - com.bitgapp.eqmac
+  - net.phere.GitX
+  - com.apple.script.id.MacYTDL
+
+# Additional mouse conveniences adjusting window layout
+mouse-swaps-windows: true
+mouse-resizes-windows: truek

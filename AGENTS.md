@@ -15,6 +15,7 @@ This is a personal dotfile repository for macOS, managed by [chezmoi](https://ww
 ├── .chezmoi.toml.tmpl        # chezmoi config template (prompts for `data.email`)
 ├── .chezmoiexternal.toml     # external repos managed by chezmoi
 ├── .chezmoiignore            # ignore rules (hostname-gated)
+├── dot_amethyst.yml          # ~/.amethyst.yml (Amethyst tiling WM config)
 ├── dot_zshrc.tmpl            # ~/.zshrc (chezmoi template with hostname/os conditionals)
 └── dot_config/
     ├── scripts/
@@ -27,15 +28,13 @@ This is a personal dotfile repository for macOS, managed by [chezmoi](https://ww
     │       ├── executable_battery.sh    # pmset battery % + icon
     │       ├── executable_clock.sh      # date label
     │       ├── executable_front_app.sh  # front app label
-    │       ├── executable_space.sh      # per-space app icons via yabai/jq
+    │       ├── executable_space.sh      # per-space app icons via native space_windows_change + jq
     │       └── executable_volume.sh     # volume % + icon
     ├── skhd/
-    │   └── skhdrc                       # hotkey daemon bindings (alt/ctrl/shift)
-    ├── wezterm/
-    │   ├── wezterm.lua                  # terminal config (DepartureMono Nerd Font)
-    │   └── toggle_color_scheme.lua      # leader-triggered dark/light toggle
-    └── yabai/
-        └── executable_yabairc           # yabai window-manager config + rules
+    │   └── skhdrc                       # skhd.zig bindings + HID remap (rctrl -> rcmd)
+    └── wezterm/
+        ├── wezterm.lua                  # terminal config (DepartureMono Nerd Font)
+        └── toggle_color_scheme.lua      # leader-triggered dark/light toggle
 ```
 
 > **Note:** chezmoi strips the `dot_` prefix and `executable_` prefix (and adds the executable bit) when deploying. `dot_zshrc.tmpl` → `~/.zshrc`; `dot_config/sketchybar/executable_sketchybarrc` → `~/.config/sketchybar/sketchybarrc` (executable).
@@ -49,8 +48,8 @@ The repo targets two macOS hostnames, gated via chezmoi template conditionals:
 | Hostname  | OS        | Notes                                                                                                                                               |
 | --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stratus` | macOS     | Adds `~/.spicetify` and `smcFanControl` to PATH                                                                                                     |
-| `cirrus`  | macOS     | Adds `~/.spicetify`, `~/scripts`, `~/.config/scripts`, `bat` MANPAGER, Antigravity IDE, Obsidian CLI to PATH; includes sketchybar/skhd/yabai config |
-| _other_   | non-macOS | `.chezmoiignore` excludes `.config/skhd`, `.config/yabai`, `.config/sketchybar`                                                                     |
+| `cirrus`  | macOS     | Adds `~/.spicetify`, `~/scripts`, `~/.config/scripts`, `bat` MANPAGER, Antigravity IDE, Obsidian CLI to PATH; includes sketchybar/skhd/Amethyst config |
+| _other_   | non-macOS | `.chezmoiignore` excludes `.config/skhd`, `.amethyst.yml`, `.config/sketchybar`                                                                    |
 
 OS-gated: `darwin`-only alias `nobrew` (brew with `HOMEBREW_NO_AUTO_UPDATE=1`).
 
@@ -73,9 +72,11 @@ OS-gated: `darwin`-only alias `nobrew` (brew with `HOMEBREW_NO_AUTO_UPDATE=1`).
 
 **Window management (macOS, `cirrus` only)**
 
-- yabai (bsp layout, 2px padding/gap, external_bar for sketchybar)
-- skhd (alt/ctrl/shift hotkeys: HJKL focus/swap/warp, grid snapping, space focus/move)
-- yabai rules: unmanaged apps (System Settings, Calculator, Raycast, mpv, etc.)
+- Amethyst (`~/.amethyst.yml`: tall/wide/fullscreen/column/bsp layouts, 2px margins, 25pt top padding for sketchybar); shortcuts live in Amethyst's preferences UI, not the YAML
+- skhd.zig >= 0.2.3 (installed as brew cask `jackielii/tap/skhd-zig`, not the old formula; `.remap` needs it plus the root `skhd-grabber`, set up via `skhd --start-service`)
+- skhd remap: `rctrl` -> `rcmd` via `.remap` rules, guarded per `.device` (vendor/product IDs from `skhd --list-devices`); reason: the external keyboard has a right ctrl but no right cmd key
+- Amethyst `floating` list (bundle IDs): System Settings, Calculator, Raycast, mpv, etc.
+- Mission Control "Switch to Desktop 1–9" (⌃1…⌃9) must be enabled; sketchybar space clicks send those keystrokes
 
 **Status bar**
 
@@ -123,9 +124,10 @@ OS-gated: `darwin`-only alias `nobrew` (brew with `HOMEBREW_NO_AUTO_UPDATE=1`).
 ### Editing conventions
 
 - Shell files use `#!/usr/bin/env bash` or `#!/bin/zsh` shebangs; sketchybar plugins use `#!/bin/sh` or `#!/bin/bash`.
+- sketchybar space items rely on sketchybar's native space tracking (`$SELECTED`, `space_windows_change` `$INFO`), not a WM query API.
 - sketchybar plugins source `$CONFIG_DIR/colors.sh` and `$CONFIG_DIR/font.sh` for theme vars.
 - WezTerm color scheme is toggled via leader `CTRL+W` then `CTRL+C`; state lives in `~/.color-scheme`.
-- yabai `skhdrc` and `yabairc` only apply on `cirrus`; do not add new sketchybar/yabai/skhd entries without updating `.chezmoiignore` if they should be host-excluded.
+- `skhdrc`, `.amethyst.yml` and sketchybar only apply on `cirrus`; do not add new sketchybar/Amethyst/skhd entries without updating `.chezmoiignore` if they should be host-excluded.
 
 ### Branches
 

@@ -138,6 +138,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # 1. Replace zsh's default completion selection menu with fzf!
 zinit light Aloxaf/fzf-tab
 # 2. pnpm aliases inspired by oh-my-zsh plugins https://github.com/ntnyq/omz-plugin-pnpm
+zstyle ':omz:plugins:pnpm' global-path false # plugin would export PNPM_HOME; PATH is set below
 zinit light ntnyq/omz-plugin-pnpm
 unalias pi # get all pnpm shortcuts except this
 
@@ -330,14 +331,12 @@ if [ -d "$HOME/.bun" ]; then
   [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 fi
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  # pnpm v11
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
+# pnpm global bins (PNPM_HOME left unset; pnpm uses its per-OS default)
+{{- if eq .chezmoi.os "darwin" }}
+export PATH="$HOME/Library/pnpm/bin:$PATH"
+{{- else }}
+export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm/bin:$PATH"
+{{- end }}
 
 #compdef pnpm
 ###-begin-pnpm-completion-###
@@ -368,7 +367,7 @@ fi
 ###-end-pnpm-completion-###
 
 ## Added by Antigravity IDE
-export PATH="/Users/hawk/.antigravity-ide/antigravity-ide/bin:$PATH"
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
 
 # Added by DevRelay installer
 export PATH="$HOME/.devrelay/bin:$PATH"
